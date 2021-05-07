@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { bodyPart, equipment, exercise } from "../data/interfaces";
-import { bodyParts, equipments } from "../data/enums";
+import { equipments } from "../data/enums";
 
 import { categories } from "../data/bodyParts";
 
@@ -15,7 +15,6 @@ type props = {
 };
 
 const MainPage = ({ exercises }: props) => {
-	// const idbKeyval = require("idb-keyval");
 	const equipmentss: equipment[] = [
 		{
 			key: equipments.none,
