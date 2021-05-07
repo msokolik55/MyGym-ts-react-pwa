@@ -1,0 +1,132 @@
+import React, { useState } from "react";
+
+import { bodyPart, equipment, exercise } from "../data/interfaces";
+import { bodyParts, equipments } from "../data/enums";
+
+import { categories } from "../data/bodyParts";
+
+// enum sortTypes {
+// 	bodyPart,
+// 	equipments
+// }
+
+type props = {
+	exercises: exercise[];
+};
+
+const MainPage = ({ exercises }: props) => {
+	// const idbKeyval = require("idb-keyval");
+	const equipmentss: equipment[] = [
+		{
+			key: equipments.none,
+			name: "Ziadne"
+		},
+		{
+			key: equipments.dumbbells,
+			name: "Jednorucky"
+		},
+		{
+			key: equipments.double,
+			name: "Obojrucka"
+		}
+	];
+
+	const randNumber = (arr: any[]) => {
+		return Math.floor(Math.random() * arr.length);
+	};
+
+	function renderExercise(exer: exercise) {
+		return (
+			<div>
+				<h4>{exer.name}</h4>
+				<p>
+					Kategoria:{" "}
+					{categories
+						.filter((categ) => categ.key === exer.bodyPart)
+						.map((categ) => categ.name)}
+				</p>
+				{exer.weights !== undefined && <p>Vahy: {exer.weights.join(" - ")}</p>}
+				{exer.equipments !== undefined && (
+					<p>
+						Pomocky:{" "}
+						{equipmentss
+							.filter((equip) => equip.key === exer.equipments)
+							.map((equip) => equip.name)}
+					</p>
+				)}
+			</div>
+		);
+	}
+
+	const generateCategory = (
+		setter: React.Dispatch<React.SetStateAction<exercise[]>>
+	) => {
+		const randCateg = randNumber(categories);
+		setCategory(categories[randCateg]);
+		generateExercises(categories[randCateg], setter);
+	};
+
+	const generateExercises = (
+		category: bodyPart,
+		setter: React.Dispatch<React.SetStateAction<exercise[]>>
+	) => {
+		let count = 0;
+		let used: number[] = [];
+		let training: exercise[] = [];
+		let choice = exercises.filter((exer) => exer.bodyPart === category.key);
+
+		while (count < category.count && count < choice.length) {
+			let i = randNumber(choice);
+			if (!used.includes(i)) {
+				used.push(i);
+				training.push(choice[i]);
+				count++;
+			}
+		}
+
+		setter(training);
+	};
+
+	// const [sortBy, setSortBy] = useState<sortTypes>(sortTypes.bodyPart);
+	const [training, setTraining] = useState<exercise[]>([]);
+	const [category, setCategory] = useState<bodyPart | undefined>();
+
+	return (
+		<div className="App">
+			{/* <button onClick={() => setSortBy(sortTypes.bodyPart)}>Partie</button>
+			<button onClick={() => setSortBy(sortTypes.equipments)}>Naradie</button> */}
+
+			<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
+			{category !== undefined && <h2>{category.name}</h2>}
+			{training.map((exer, id) => (
+				<div key={id}>{renderExercise(exer)}</div>
+			))}
+
+			{/* {sortBy === sortTypes.bodyPart &&
+				categories.map((category) => (
+					<div>
+						{exercises.filter((exer) => exer.bodyPart === category.key)
+							.length > 0 && (
+							<div>
+								<h1>{category.name + ": "}</h1>
+								{exercises
+									.filter((exer) => exer.bodyPart === category.key)
+									.map((exer) => renderExercise(exer))}
+							</div>
+						)}
+					</div>
+				))}
+			{sortBy === sortTypes.equipments &&
+				equipmentss.map((equip) => (
+					<div>
+						<h1>{equip.name + ": "}</h1>
+						{exercises
+							.filter((exer) => exer.equipments === equip.key)
+							.map((exer) => renderExercise(exer))}
+					</div>
+				))} */}
+		</div>
+	);
+};
+
+export default MainPage;
