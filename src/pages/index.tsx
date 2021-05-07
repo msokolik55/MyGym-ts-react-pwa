@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { exercises } from "../exercises";
 import { bodyPart, equipment, exercise } from "../interfaces";
 import { bodyParts, equipments } from "../enums";
 
@@ -9,7 +8,11 @@ import { bodyParts, equipments } from "../enums";
 // 	equipments
 // }
 
-const MainPage = () => {
+type props = {
+	exercises: exercise[];
+};
+
+const MainPage = ({ exercises }: props) => {
 	// const idbKeyval = require("idb-keyval");
 	const categories: bodyPart[] = [
 		{
@@ -90,6 +93,7 @@ const MainPage = () => {
 		setter: React.Dispatch<React.SetStateAction<exercise[]>>
 	) => {
 		const randCateg = randNumber(categories);
+		setCategory(categories[randCateg]);
 		generateExercises(categories[randCateg], setter);
 	};
 
@@ -116,6 +120,7 @@ const MainPage = () => {
 
 	// const [sortBy, setSortBy] = useState<sortTypes>(sortTypes.bodyPart);
 	const [training, setTraining] = useState<exercise[]>([]);
+	const [category, setCategory] = useState<bodyPart | undefined>();
 
 	return (
 		<div className="App">
@@ -123,6 +128,7 @@ const MainPage = () => {
 			<button onClick={() => setSortBy(sortTypes.equipments)}>Naradie</button> */}
 
 			<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
+			{category !== undefined && <h2>{category.name}</h2>}
 			{training.map((exer, id) => (
 				<div key={id}>{renderExercise(exer)}</div>
 			))}
