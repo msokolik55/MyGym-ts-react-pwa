@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-import { exercises } from "./exercises";
+import { exercisesDemo } from "./exercises";
 
 // pages
 import MainPage from "./pages";
 import EditPage from "./pages/edit";
 
 function App() {
-	const [allExer, setAllExer] = useState(exercises);
+	const [allExer, setAllExer] = useState(exercisesDemo);
 
 	return (
 		<Router>

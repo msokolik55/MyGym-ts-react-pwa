@@ -1,7 +1,7 @@
 import { exercise } from "./interfaces";
 import { bodyParts, equipments } from "./enums";
 
-export const exercises: exercise[] = [
+export const exercisesDemo: exercise[] = [
 	//#region Biceps
 	{
 		name: "Obojruč",
