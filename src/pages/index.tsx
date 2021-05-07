@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
-import { bodyPart, equipment, exercise } from "../interfaces";
-import { bodyParts, equipments } from "../enums";
+import { bodyPart, equipment, exercise } from "../data/interfaces";
+import { bodyParts, equipments } from "../data/enums";
+
+import { categories } from "../data/bodyParts";
 
 // enum sortTypes {
 // 	bodyPart,
@@ -14,39 +16,6 @@ type props = {
 
 const MainPage = ({ exercises }: props) => {
 	// const idbKeyval = require("idb-keyval");
-	const categories: bodyPart[] = [
-		{
-			key: bodyParts.biceps,
-			name: "Biceps",
-			count: 2
-		},
-		{
-			key: bodyParts.triceps,
-			name: "Triceps",
-			count: 3
-		},
-		{
-			key: bodyParts.shoulders,
-			name: "Ramena",
-			count: 3
-		},
-		{
-			key: bodyParts.chest,
-			name: "Hrudnik",
-			count: 3
-		},
-		{
-			key: bodyParts.back,
-			name: "Chrbat",
-			count: 3
-		},
-		{
-			key: bodyParts.calves,
-			name: "Lytka",
-			count: 3
-		}
-	];
-
 	const equipmentss: equipment[] = [
 		{
 			key: equipments.none,

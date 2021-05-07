@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { exercise } from "../interfaces";
+import { exercise } from "../data/interfaces";
+import { getBodyPartName } from "../data/bodyParts";
 
 type props = {
 	exercises: exercise[];
@@ -60,8 +61,9 @@ const EditWeights = (
 	};
 
 	return (
-		<div>
-			{currExercise.name}
+		<div style={{ marginBottom: "1em" }}>
+			{"[" + getBodyPartName(currExercise.bodyPart).name + "] "}
+			<i>{currExercise.name}</i>
 			{currExercise.weights !== undefined && (
 				<div>
 					<input
