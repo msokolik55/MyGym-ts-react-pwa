@@ -25,6 +25,22 @@ const ExportPage = ({ exercises }: props) => {
 		return text;
 	};
 
+	const exportFullProgramToString = (exer: exercise) => {
+		if (exer.fullProgram === undefined) {
+			return "";
+		}
+
+		let text = "\t\tfullProgram: [\n";
+		exer.fullProgram.forEach((item) => {
+			text += "\t\t\t{\n";
+			text += '\t\t\t\tname: "' + item.name + '"\n';
+			text += '\t\t\t\trepetitions: "' + item.repetitions + '"\n';
+			text += "\t\t\t},\n";
+		});
+		text += "\t\t],\n";
+		return text;
+	};
+
 	const exerciseToString = (exer: exercise, cat: bodyPart) => {
 		let text = "\t{\n";
 		text += '\t\tname: "' + exer.name + '",\n';
@@ -34,9 +50,13 @@ const ExportPage = ({ exercises }: props) => {
 			text += "\t\tweights: [" + exer.weights?.join(", ") + "],\n";
 
 		if (exer.equipments !== undefined)
-			text += "\t\tequipments: equipments." + equipments[exer.equipments] + "\n";
-		text += "\t},\n";
+			text += "\t\tequipments: equipments." + equipments[exer.equipments] + ",\n";
 
+		text += exportFullProgramToString(exer);
+
+		if (exer.notes !== undefined) text += '\t\tnotes: "' + exer.notes + '",\n';
+
+		text += "\t},\n";
 		return text;
 	};
 
