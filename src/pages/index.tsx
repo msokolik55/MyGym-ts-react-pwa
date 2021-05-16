@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { get, set } from "idb-keyval";
 
-import { bodyPart, equipment, exercise } from "../data/interfaces";
-import { equipments } from "../data/enums";
+import { bodyPart, exercise } from "../data/interfaces";
+import { equipmentss } from "../data/bodyParts";
 
 import { categories } from "../data/bodyParts";
 
@@ -16,25 +16,6 @@ type props = {
 };
 
 const MainPage = ({ exercises }: props) => {
-	const equipmentss: equipment[] = [
-		{
-			key: equipments.none,
-			name: "Ziadne"
-		},
-		{
-			key: equipments.dumbbells,
-			name: "Jednorucky"
-		},
-		{
-			key: equipments.double,
-			name: "Obojrucka"
-		},
-		{
-			key: equipments.machine,
-			name: "Stroj"
-		}
-	];
-
 	const randNumber = (arr: any[]) => {
 		return Math.floor(Math.random() * arr.length);
 	};

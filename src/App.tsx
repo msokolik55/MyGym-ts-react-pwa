@@ -8,6 +8,7 @@ import { exercisesDemo } from "./data/exercises";
 // pages
 import MainPage from "./pages";
 import EditPage from "./pages/edit";
+import ExportPage from "./pages/export";
 
 function App() {
 	const [allExer, setAllExer] = useState(exercisesDemo);
@@ -25,7 +26,8 @@ function App() {
 	return (
 		<Router>
 			<nav>
-				<Link to="/">Trening</Link> | <Link to="/edit">Edit</Link>
+				<Link to="/">Trening</Link> | <Link to="/edit">Edit</Link> |{" "}
+				<Link to="/export">Export</Link>
 			</nav>
 			<Switch>
 				<Route
@@ -39,6 +41,11 @@ function App() {
 					component={() => (
 						<EditPage exercises={allExer} setExercises={setAllExer} />
 					)}
+				/>
+				<Route
+					exact
+					path="/export"
+					component={() => <ExportPage exercises={allExer} />}
 				/>
 				<Redirect to="/" />
 			</Switch>

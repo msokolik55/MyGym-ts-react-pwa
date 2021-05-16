@@ -1,5 +1,5 @@
-import { bodyPart } from "./interfaces";
-import { bodyParts } from "./enums";
+import { bodyPart, equipment } from "./interfaces";
+import { bodyParts, equipments } from "./enums";
 
 export const getBodyPartName = (key: bodyParts) => {
 	return categories.filter((categ) => categ.key === key)[0];
@@ -35,5 +35,24 @@ export const categories: bodyPart[] = [
 		key: bodyParts.calves,
 		name: "Lytka",
 		count: 3
+	}
+];
+
+export const equipmentss: equipment[] = [
+	{
+		key: equipments.none,
+		name: "Ziadne"
+	},
+	{
+		key: equipments.dumbbells,
+		name: "Jednorucky"
+	},
+	{
+		key: equipments.double,
+		name: "Obojrucka"
+	},
+	{
+		key: equipments.machine,
+		name: "Stroj"
 	}
 ];
