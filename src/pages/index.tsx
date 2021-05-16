@@ -24,14 +24,35 @@ const MainPage = ({ exercises }: props) => {
 		return (
 			<div>
 				<h4>{exer.name}</h4>
-				{exer.weights !== undefined && <p>Vahy: {exer.weights.join(" - ")}</p>}
-				{exer.equipments !== undefined && (
+				{exer.notes !== undefined && <p>{exer.notes}</p>}
+
+				{exer.fullProgram === undefined && exer.weights !== undefined && (
+					<p>Vahy: {exer.weights.join(" - ")}</p>
+				)}
+
+				{exer.fullProgram === undefined && exer.equipments !== undefined && (
 					<p>
 						Pomocky:{" "}
 						{equipmentss
 							.filter((equip) => equip.key === exer.equipments)
 							.map((equip) => equip.name)}
 					</p>
+				)}
+
+				{exer.fullProgram !== undefined && (
+					<table
+						style={{
+							marginLeft: "auto",
+							marginRight: "auto",
+							borderSpacing: 10
+						}}>
+						{exer.fullProgram.map((item) => (
+							<tr>
+								<td>{item.name}</td>
+								<td>{item.repetitions}</td>
+							</tr>
+						))}
+					</table>
 				)}
 			</div>
 		);

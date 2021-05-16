@@ -12,7 +12,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Jednoruč obidve naraz",
 		bodyPart: bodyParts.biceps,
-		weights: [0, 0, 0, 0],
+		weights: [1.1, 2.3, 3.4, 4.6],
 		equipments: equipments.dumbbells
 	},
 	{
@@ -55,7 +55,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Tricepsový bench",
 		bodyPart: bodyParts.triceps,
-		weights: [0, 0, 0, 0],
+		weights: [4.5, 6.8, 9.1, 11.4],
 		equipments: equipments.double
 	},
 	{
@@ -65,7 +65,7 @@ export const exercisesDemo: exercise[] = [
 		equipments: equipments.machine
 	},
 	{
-		name: "Sťahovanie kladky na úzko v miernom predklone",
+		name: "Sťahovanie kladky na úzko v miernom predklone",
 		bodyPart: bodyParts.triceps,
 		weights: [1, 2, 3, 4],
 		equipments: equipments.machine
@@ -73,7 +73,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Sťahovanie kladky s V držiakom",
 		bodyPart: bodyParts.triceps,
-		weights: [1, 2, 3, 4],
+		weights: [1, 2, 3, 3],
 		equipments: equipments.machine
 	},
 	{
@@ -85,7 +85,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Predpažovanie spoza hlavy s lanovým",
 		bodyPart: bodyParts.triceps,
-		weights: [0, 0, 0, 0],
+		weights: [1, 2, 3, 4],
 		equipments: equipments.machine
 	},
 	{
@@ -94,7 +94,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	//#endregion
 
-	//#region Shoulders
+	//#region Ramena
 	{
 		name: "Predpažovanie s vytočením",
 		bodyPart: bodyParts.shoulders,
@@ -110,13 +110,13 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Tlaky obojručkou nad hlavu",
 		bodyPart: bodyParts.shoulders,
-		weights: [3.4, 5.7, 8.0, 10.3],
+		weights: [3.4, 5.7, 8, 10.3],
 		equipments: equipments.double
 	},
 	{
 		name: "Príťahy obojručky k brade",
 		bodyPart: bodyParts.shoulders,
-		weights: [3.4, 5.7, 8.0, 10.3],
+		weights: [3.4, 5.7, 8, 10.3],
 		equipments: equipments.double
 	},
 	{
@@ -151,7 +151,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	//#endregion
 
-	//#region Chest
+	//#region Hrudnik
 	{
 		name: "Bench press jednoručky",
 		bodyPart: bodyParts.chest,
@@ -178,7 +178,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	//#endregion
 
-	//#region Back
+	//#region Chrbat
 	{
 		name: "Mŕtvy ťah",
 		bodyPart: bodyParts.back,
@@ -212,7 +212,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Krčenie ramien",
 		bodyPart: bodyParts.back,
-		weights: [0, 0, 0, 0],
+		weights: [2.3, 3.4, 4.6, 5.7],
 		equipments: equipments.dumbbells
 	},
 	{
@@ -220,9 +220,83 @@ export const exercisesDemo: exercise[] = [
 		bodyPart: bodyParts.back,
 		weights: [0, 0, 0, 0],
 		equipments: equipments.double
-	}
+	},
 	//#endregion
 
-	//#region Calves
+	//#region Lytka
+	{
+		name: "BarbarianBody",
+		bodyPart: bodyParts.calves,
+		fullProgram: [
+			{
+				name: "uni-lateral calf raises",
+				repetitions: 15
+			},
+			{
+				name: "dual inner raises",
+				repetitions: 15
+			},
+			{
+				name: "dual neutral raises",
+				repetitions: 15
+			},
+			{
+				name: "dual outer raises",
+				repetitions: 15
+			},
+			{
+				name: "dual inner raises",
+				repetitions: 15
+			},
+			{
+				name: "dual neutral raises",
+				repetitions: 15
+			},
+			{
+				name: "dual outer raises",
+				repetitions: 15
+			},
+			{
+				name: "uni-lateral bunny hops",
+				repetitions: 20
+			},
+			{
+				name: "speed calf raises",
+				repetitions: 30
+			},
+			{
+				name: "dual bunny hops",
+				repetitions: 30
+			}
+		],
+		notes: "https://www.youtube.com/watch?v=uVu9vToACiQ&ab_channel=BarbarianBody"
+	},
+	//#endregion
+
+	//#region Nohy
+	{
+		name: "Drepy",
+		bodyPart: bodyParts.legs,
+		weights: [0, 0, 0, 0],
+		equipments: equipments.double
+	},
+	{
+		name: "Rumunsky mrtvy tah s vystretymi nohami",
+		bodyPart: bodyParts.legs,
+		weights: [0, 0, 0, 0],
+		equipments: equipments.dumbbells
+	},
+	{
+		name: "Vypony na lytka",
+		bodyPart: bodyParts.legs,
+		weights: [0, 0, 0, 0],
+		equipments: equipments.dumbbells
+	},
+	{
+		name: "Vypady",
+		bodyPart: bodyParts.legs,
+		weights: [0, 0, 0, 0],
+		equipments: equipments.dumbbells
+	}
 	//#endregion
 ];

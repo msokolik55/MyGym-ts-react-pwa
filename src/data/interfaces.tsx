@@ -11,9 +11,16 @@ export interface bodyPart {
 	count: Number;
 }
 
+export interface fullProgramItem {
+	name: string;
+	repetitions: Number;
+}
+
 export interface exercise {
 	name: string;
 	bodyPart: bodyParts;
 	weights?: number[];
 	equipments?: equipments;
+	fullProgram?: fullProgramItem[];
+	notes?: string;
 }
