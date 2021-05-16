@@ -89,17 +89,27 @@ const MainPage = ({ exercises }: props) => {
 	const [category, setCategory] = useState<bodyPart | undefined>();
 
 	return (
-		<div className="App">
+		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			{/* <button onClick={() => setSortBy(sortTypes.bodyPart)}>Partie</button>
 			<button onClick={() => setSortBy(sortTypes.equipments)}>Naradie</button> */}
 
-			<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
-			{category !== undefined && <h2>{category.name}</h2>}
-			{training.map((exer, id) => (
-				<div key={id}>{renderExercise(exer)}</div>
-			))}
+			<div style={{ flex: 1 }}>
+				<ul style={{ textAlign: "left" }}>
+					Kombinacie:
+					<li>ramena + biceps + triceps</li>
+					<li>hrudnik + chrbat</li>
+					<li>nohy</li>
+				</ul>
+			</div>
 
-			{/* {sortBy === sortTypes.bodyPart &&
+			<div className="App" style={{ flex: 5 }}>
+				<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
+				{category !== undefined && <h2>{category.name}</h2>}
+				{training.map((exer, id) => (
+					<div key={id}>{renderExercise(exer)}</div>
+				))}
+
+				{/* {sortBy === sortTypes.bodyPart &&
 				categories.map((category) => (
 					<div>
 						{exercises.filter((exer) => exer.bodyPart === category.key)
@@ -122,6 +132,7 @@ const MainPage = ({ exercises }: props) => {
 							.map((exer) => renderExercise(exer))}
 					</div>
 				))} */}
+			</div>
 		</div>
 	);
 };
