@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { get, set } from "idb-keyval";
 
 import { bodyPart, equipment, exercise } from "../data/interfaces";
 import { equipments } from "../data/enums";
@@ -87,6 +88,23 @@ const MainPage = ({ exercises }: props) => {
 	// const [sortBy, setSortBy] = useState<sortTypes>(sortTypes.bodyPart);
 	const [training, setTraining] = useState<exercise[]>([]);
 	const [category, setCategory] = useState<bodyPart | undefined>();
+
+	useEffect(() => {
+		get("training").then((val) => {
+			if (val === undefined) setTraining([]);
+			else setTraining(val);
+		});
+		get("category").then((val) => {
+			if (val === undefined) setCategory(categories[0]);
+			else setCategory(val);
+		});
+	}, []);
+	useEffect(() => {
+		set("training", training);
+	}, [training]);
+	useEffect(() => {
+		set("category", category);
+	}, [category]);
 
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
