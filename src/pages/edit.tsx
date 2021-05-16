@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { exercise } from "../data/interfaces";
-import { getBodyPartName } from "../data/bodyParts";
+import { categories } from "../data/bodyParts";
 
 type props = {
 	exercises: exercise[];
@@ -62,7 +62,6 @@ const EditWeights = (
 
 	return (
 		<div style={{ marginBottom: "1em" }}>
-			{"[" + getBodyPartName(currExercise.bodyPart).name + "] "}
 			<i>{currExercise.name}</i>
 			{currExercise.weights !== undefined && (
 				<div>
@@ -123,8 +122,32 @@ const EditWeights = (
 };
 
 const EditPage = ({ exercises, setExercises }: props) => {
+	// const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
 	return (
-		<div>{exercises.map((exer) => EditWeights(exer, exercises, setExercises))}</div>
+		<div>
+			{/* <select
+				onChange={(e) =>
+					setSelectedCategory(
+						categories.filter(
+							(categ) => categ.key === Number(e.target.value)
+						)[0]
+					)
+				}>
+				{categories.map((cat) => (
+					<option value={cat.key}>{cat.name}</option>
+				))}
+			</select> */}
+
+			{categories.map((cat) => (
+				<div>
+					<h3>{cat.name}</h3>
+					{exercises
+						.filter((exer) => exer.bodyPart === cat.key)
+						.map((exer) => EditWeights(exer, exercises, setExercises))}
+				</div>
+			))}
+		</div>
 	);
 };
 

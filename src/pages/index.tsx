@@ -27,6 +27,10 @@ const MainPage = ({ exercises }: props) => {
 		{
 			key: equipments.double,
 			name: "Obojrucka"
+		},
+		{
+			key: equipments.machine,
+			name: "Stroj"
 		}
 	];
 
@@ -38,12 +42,6 @@ const MainPage = ({ exercises }: props) => {
 		return (
 			<div>
 				<h4>{exer.name}</h4>
-				<p>
-					Kategoria:{" "}
-					{categories
-						.filter((categ) => categ.key === exer.bodyPart)
-						.map((categ) => categ.name)}
-				</p>
 				{exer.weights !== undefined && <p>Vahy: {exer.weights.join(" - ")}</p>}
 				{exer.equipments !== undefined && (
 					<p>
