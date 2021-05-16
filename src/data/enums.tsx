@@ -5,7 +5,8 @@ export enum bodyParts {
 	chest,
 	back,
 	calves,
-	legs
+	legs,
+	core
 }
 
 export enum equipments {

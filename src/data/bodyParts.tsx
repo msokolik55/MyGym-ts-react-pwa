@@ -40,6 +40,11 @@ export const categories: bodyPart[] = [
 		key: bodyParts.legs,
 		name: "Nohy",
 		count: 3
+	},
+	{
+		key: bodyParts.core,
+		name: "Core",
+		count: 1
 	}
 ];
 
