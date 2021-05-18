@@ -93,7 +93,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 			else setTraining(val);
 		});
 		get("category").then((val) => {
-			if (val === undefined) setCategory(categories[0]);
+			if (val === undefined) setCategory(undefined);
 			else setCategory(val);
 		});
 	}, []);
