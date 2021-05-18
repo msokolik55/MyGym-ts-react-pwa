@@ -24,3 +24,10 @@ export interface exercise {
 	fullProgram?: fullProgramItem[];
 	notes?: string;
 }
+
+export interface history {
+	// date: Date;
+	date: string;
+	category: bodyParts;
+	exercises: exercise[];
+}
