@@ -10,11 +10,13 @@ import { makeStyles } from "@material-ui/styles";
 
 // data
 import { exercisesDemo } from "./data/exercises";
+import { history } from "./data/interfaces";
 
 // pages
 import MainPage from "./pages";
 import EditPage from "./pages/edit";
 import ExportPage from "./pages/export";
+import HistoryPage from "./pages/history";
 
 const useStyles = makeStyles({
 	root: {
@@ -24,16 +26,26 @@ const useStyles = makeStyles({
 
 function App() {
 	const [allExer, setAllExer] = useState(exercisesDemo);
+	const [history, setHistory] = useState<history[]>([]);
 
 	useEffect(() => {
 		get("exercises").then((val) => {
 			if (val === undefined) setAllExer(exercisesDemo);
 			else setAllExer(val);
 		});
+		get("history").then((val) => {
+			if (val === undefined) setHistory([]);
+			else setHistory(val);
+		});
 	}, []);
+
 	useEffect(() => {
 		set("exercises", allExer);
 	}, [allExer]);
+
+	useEffect(() => {
+		set("history", history);
+	}, [history]);
 
 	const classes = useStyles();
 	const [value, setValue] = useState(0);
@@ -83,7 +95,13 @@ function App() {
 					<Route
 						exact
 						path="/"
-						component={() => <MainPage exercises={allExer} />}
+						component={() => (
+							<MainPage
+								exercises={allExer}
+								history={history}
+								setHistory={setHistory}
+							/>
+						)}
 					/>
 					<Route
 						exact
@@ -96,6 +114,13 @@ function App() {
 						exact
 						path="/export"
 						component={() => <ExportPage exercises={allExer} />}
+					/>
+					<Route
+						exact
+						path="/history"
+						component={() => (
+							<HistoryPage data={history} setData={setHistory} />
+						)}
 					/>
 					<Redirect to="/" />
 				</Switch>

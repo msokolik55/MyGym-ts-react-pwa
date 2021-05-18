@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { get, set } from "idb-keyval";
 
-import { bodyPart, exercise } from "../data/interfaces";
+import { bodyPart, exercise, history } from "../data/interfaces";
 import { equipmentss } from "../data/bodyParts";
 
 import { categories } from "../data/bodyParts";
 
-// enum sortTypes {
-// 	bodyPart,
-// 	equipments
-// }
-
 type props = {
 	exercises: exercise[];
+	history: history[];
+	setHistory: React.Dispatch<React.SetStateAction<history[]>>;
 };
 
-const MainPage = ({ exercises }: props) => {
+const MainPage = ({ exercises, history, setHistory }: props) => {
 	const randNumber = (arr: any[]) => {
 		return Math.floor(Math.random() * arr.length);
 	};
@@ -87,7 +84,6 @@ const MainPage = ({ exercises }: props) => {
 		setter(training);
 	};
 
-	// const [sortBy, setSortBy] = useState<sortTypes>(sortTypes.bodyPart);
 	const [training, setTraining] = useState<exercise[]>([]);
 	const [category, setCategory] = useState<bodyPart | undefined>();
 
@@ -108,11 +104,23 @@ const MainPage = ({ exercises }: props) => {
 		set("category", category);
 	}, [category]);
 
+	const formatDate = () => {
+		const date = new Date();
+		let result =
+			date.getDate().toString() +
+			"." +
+			(date.getMonth() + 1).toString() +
+			"." +
+			date.getFullYear().toString() +
+			" " +
+			date.getHours().toString() +
+			":" +
+			date.getMinutes().toString();
+		return result;
+	};
+
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
-			{/* <button onClick={() => setSortBy(sortTypes.bodyPart)}>Partie</button>
-			<button onClick={() => setSortBy(sortTypes.equipments)}>Naradie</button> */}
-
 			<div style={{ flex: 1 }}>
 				<ul style={{ textAlign: "left" }}>
 					Kombinacie:
@@ -124,34 +132,30 @@ const MainPage = ({ exercises }: props) => {
 
 			<div className="App" style={{ flex: 5 }}>
 				<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
-				{category !== undefined && <h2>{category.name}</h2>}
+				{category !== undefined && (
+					<>
+						{training.length > 0 && (
+							<button
+								onClick={() => {
+									setHistory([
+										...history,
+										{
+											// date: new Date(),
+											date: formatDate(),
+											category: category.key,
+											exercises: training
+										}
+									]);
+								}}>
+								Odtrenovane
+							</button>
+						)}
+						<h2>{category.name}</h2>
+					</>
+				)}
 				{training.map((exer, id) => (
 					<div key={id}>{renderExercise(exer)}</div>
 				))}
-
-				{/* {sortBy === sortTypes.bodyPart &&
-				categories.map((category) => (
-					<div>
-						{exercises.filter((exer) => exer.bodyPart === category.key)
-							.length > 0 && (
-							<div>
-								<h1>{category.name + ": "}</h1>
-								{exercises
-									.filter((exer) => exer.bodyPart === category.key)
-									.map((exer) => renderExercise(exer))}
-							</div>
-						)}
-					</div>
-				))}
-			{sortBy === sortTypes.equipments &&
-				equipmentss.map((equip) => (
-					<div>
-						<h1>{equip.name + ": "}</h1>
-						{exercises
-							.filter((exer) => exer.equipments === equip.key)
-							.map((exer) => renderExercise(exer))}
-					</div>
-				))} */}
 			</div>
 		</div>
 	);
