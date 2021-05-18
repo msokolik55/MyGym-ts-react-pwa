@@ -104,18 +104,23 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		set("category", category);
 	}, [category]);
 
+	const formatTwoDigits = (num: number) => {
+		const str = num.toString();
+		return str.length === 1 ? "0" + str : str;
+	};
+
 	const formatDate = () => {
 		const date = new Date();
 		let result =
-			date.getDate().toString() +
+			formatTwoDigits(date.getDate()) +
 			"." +
-			(date.getMonth() + 1).toString() +
+			formatTwoDigits(date.getMonth() + 1) +
 			"." +
 			date.getFullYear().toString() +
 			" " +
-			date.getHours().toString() +
+			formatTwoDigits(date.getHours()) +
 			":" +
-			date.getMinutes().toString();
+			formatTwoDigits(date.getMinutes());
 		return result;
 	};
 
