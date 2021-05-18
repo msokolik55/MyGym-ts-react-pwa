@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import { get, set } from "idb-keyval";
+import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
+import { FitnessCenter, Build, ImportExport, History } from "@material-ui/icons";
 
 import { exercisesDemo } from "./data/exercises";
 
@@ -25,10 +27,40 @@ function App() {
 
 	return (
 		<Router>
-			<nav>
+			<BottomNavigation>
+				<BottomNavigationAction
+					component={Link}
+					to="/"
+					label="Trening"
+					value="Trening"
+					icon={<FitnessCenter />}
+				/>
+				<BottomNavigationAction
+					component={Link}
+					to="/edit"
+					label="Edit"
+					value="Edit"
+					icon={<Build />}
+				/>
+				<BottomNavigationAction
+					component={Link}
+					to="/export"
+					label="Export"
+					value="Export"
+					icon={<ImportExport />}
+				/>
+				<BottomNavigationAction
+					component={Link}
+					to="/history"
+					label="History"
+					value="History"
+					icon={<History />}
+				/>
+			</BottomNavigation>
+			{/* <nav>
 				<Link to="/">Trening</Link> | <Link to="/edit">Edit</Link> |{" "}
 				<Link to="/export">Export</Link>
-			</nav>
+			</nav> */}
 			<Switch>
 				<Route
 					exact
