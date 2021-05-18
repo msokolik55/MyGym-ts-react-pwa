@@ -151,6 +151,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 											exercises: training
 										}
 									]);
+									alert("Pridane do historie");
 								}}>
 								Odtrenovane
 							</button>
