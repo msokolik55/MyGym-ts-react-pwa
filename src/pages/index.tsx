@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { get, set } from "idb-keyval";
-import { tables } from "../data/database";
+import { dbKeys } from "../data/database";
 
 import { bodyPart, exercise, history } from "../data/interfaces";
 import { equipmentss, categories } from "../data/bodyParts";
@@ -102,20 +102,20 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 	const [category, setCategory] = useState<bodyPart | undefined>();
 
 	useEffect(() => {
-		get(tables.training).then((val) => {
+		get(dbKeys.training).then((val) => {
 			if (val === undefined) setTraining([]);
 			else setTraining(val);
 		});
-		get(tables.actualCategory).then((val) => {
+		get(dbKeys.actualCategory).then((val) => {
 			if (val === undefined) setCategory(undefined);
 			else setCategory(val);
 		});
 	}, []);
 	useEffect(() => {
-		set(tables.training, training);
+		set(dbKeys.training, training);
 	}, [training]);
 	useEffect(() => {
-		set(tables.actualCategory, category);
+		set(dbKeys.actualCategory, category);
 	}, [category]);
 
 	const formatTwoDigits = (num: number) => {

@@ -1,4 +1,4 @@
-export const tables = {
+export const dbKeys = {
 	actualCategory: "category",
 	exercises: "exercises",
 	history: "history",

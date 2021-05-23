@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/styles";
 // data
 import { exercisesDemo } from "./data/exercises";
 import { history } from "./data/interfaces";
-import { tables } from "./data/database";
+import { dbKeys } from "./data/database";
 
 // pages
 import MainPage from "./pages";
@@ -42,32 +42,32 @@ function App() {
 	};
 
 	useEffect(() => {
-		get(tables.exercises).then((val) => {
+		get(dbKeys.exercises).then((val) => {
 			if (val === undefined) setAllExer(exercisesDemo);
 			else setAllExer(val);
 		});
 
-		get(tables.history).then((val) => {
+		get(dbKeys.history).then((val) => {
 			if (val === undefined) setHistory([]);
 			else setHistory(val);
 		});
 
-		get(tables.lastPage).then((val) => {
+		get(dbKeys.lastPage).then((val) => {
 			if (val === undefined) setValue(0);
 			else setValue(val);
 		});
 	}, []);
 
 	useEffect(() => {
-		set(tables.exercises, allExer);
+		set(dbKeys.exercises, allExer);
 	}, [allExer]);
 
 	useEffect(() => {
-		set(tables.history, history);
+		set(dbKeys.history, history);
 	}, [history]);
 
 	useEffect(() => {
-		set(tables.lastPage, value);
+		set(dbKeys.lastPage, value);
 	}, [value]);
 
 	return (
