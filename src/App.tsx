@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/styles";
 // data
 import { exercisesDemo } from "./data/exercises";
 import { history } from "./data/interfaces";
+import { tables } from "./data/database";
 
 // pages
 import MainPage from "./pages";
@@ -34,30 +35,40 @@ function App() {
 	const [allExer, setAllExer] = useState(exercisesDemo);
 	const [history, setHistory] = useState<history[]>([]);
 
-	useEffect(() => {
-		get("exercises").then((val) => {
-			if (val === undefined) setAllExer(exercisesDemo);
-			else setAllExer(val);
-		});
-		get("history").then((val) => {
-			if (val === undefined) setHistory([]);
-			else setHistory(val);
-		});
-	}, []);
-
-	useEffect(() => {
-		set("exercises", allExer);
-	}, [allExer]);
-
-	useEffect(() => {
-		set("history", history);
-	}, [history]);
-
 	const classes = useStyles();
 	const [value, setValue] = useState(0);
 	const handleChange = (newValue: number) => {
 		setValue(newValue);
 	};
+
+	useEffect(() => {
+		get(tables.exercises).then((val) => {
+			if (val === undefined) setAllExer(exercisesDemo);
+			else setAllExer(val);
+		});
+
+		get(tables.history).then((val) => {
+			if (val === undefined) setHistory([]);
+			else setHistory(val);
+		});
+
+		get(tables.lastPage).then((val) => {
+			if (val === undefined) setValue(0);
+			else setValue(val);
+		});
+	}, []);
+
+	useEffect(() => {
+		set(tables.exercises, allExer);
+	}, [allExer]);
+
+	useEffect(() => {
+		set(tables.history, history);
+	}, [history]);
+
+	useEffect(() => {
+		set(tables.lastPage, value);
+	}, [value]);
 
 	return (
 		<Grid>
