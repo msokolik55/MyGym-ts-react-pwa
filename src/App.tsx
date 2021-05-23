@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/styles";
 import { exercisesDemo } from "./data/exercises";
 import { history } from "./data/interfaces";
 import { dbKeys } from "./data/database";
+import { pagesRoutes } from "./data/pagesRoutes";
 
 // pages
 import MainPage from "./pages";
@@ -80,25 +81,25 @@ function App() {
 					showLabels>
 					<BottomNavigationAction
 						component={Link}
-						to="/"
+						to={pagesRoutes.home}
 						label="Tréning"
 						icon={<FitnessCenter />}
 					/>
 					<BottomNavigationAction
 						component={Link}
-						to="/edit"
+						to={pagesRoutes.edit}
 						label="Edit"
 						icon={<Build />}
 					/>
 					<BottomNavigationAction
 						component={Link}
-						to="/export"
+						to={pagesRoutes.export}
 						label="Export"
 						icon={<ImportExport />}
 					/>
 					<BottomNavigationAction
 						component={Link}
-						to="/history"
+						to={pagesRoutes.history}
 						label="História"
 						icon={<History />}
 					/>
@@ -112,7 +113,7 @@ function App() {
 					<Switch>
 						<Route
 							exact
-							path="/"
+							path={pagesRoutes.home}
 							component={() => (
 								<MainPage
 									exercises={allExer}
@@ -123,24 +124,24 @@ function App() {
 						/>
 						<Route
 							exact
-							path="/edit"
+							path={pagesRoutes.edit}
 							component={() => (
 								<EditPage exercises={allExer} setExercises={setAllExer} />
 							)}
 						/>
 						<Route
 							exact
-							path="/export"
+							path={pagesRoutes.export}
 							component={() => <ExportPage exercises={allExer} />}
 						/>
 						<Route
 							exact
-							path="/history"
+							path={pagesRoutes.history}
 							component={() => (
 								<HistoryPage data={history} setData={setHistory} />
 							)}
 						/>
-						<Redirect to="/" />
+						<Redirect to={pagesRoutes.home} />
 					</Switch>
 				</div>
 			</Router>
