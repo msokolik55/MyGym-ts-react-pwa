@@ -52,11 +52,6 @@ function App() {
 			if (val === undefined) setHistory([]);
 			else setHistory(val);
 		});
-
-		get(dbKeys.lastPage).then((val) => {
-			if (val === undefined) setValue(0);
-			else setValue(val);
-		});
 	}, []);
 
 	useEffect(() => {
@@ -66,10 +61,6 @@ function App() {
 	useEffect(() => {
 		set(dbKeys.history, history);
 	}, [history]);
-
-	useEffect(() => {
-		set(dbKeys.lastPage, value);
-	}, [value]);
 
 	return (
 		<Grid>
