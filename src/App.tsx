@@ -21,6 +21,11 @@ import HistoryPage from "./pages/history";
 const useStyles = makeStyles({
 	root: {
 		backgroundColor: "orange"
+	},
+	stickToBottom: {
+		width: "100%",
+		position: "fixed",
+		bottom: 0
 	}
 });
 
@@ -57,14 +62,14 @@ function App() {
 		<Grid>
 			<Router>
 				<BottomNavigation
-					className={classes.root}
+					className={`${classes.root} ${classes.stickToBottom}`}
 					value={value}
 					onChange={(event, newValue) => handleChange(newValue)}
 					showLabels>
 					<BottomNavigationAction
 						component={Link}
 						to="/"
-						label="Trening"
+						label="Tréning"
 						icon={<FitnessCenter />}
 					/>
 					<BottomNavigationAction
@@ -82,7 +87,7 @@ function App() {
 					<BottomNavigationAction
 						component={Link}
 						to="/history"
-						label="History"
+						label="História"
 						icon={<History />}
 					/>
 				</BottomNavigation>
