@@ -55,6 +55,7 @@ const ExportPage = ({ exercises }: props) => {
 		text += exportFullProgramToString(exer);
 
 		if (exer.notes !== undefined) text += '\t\tnotes: "' + exer.notes + '",\n';
+		if (exer.link !== undefined) text += '\t\tlink: "' + exer.link + '",\n';
 
 		text += "\t},\n";
 		return text;
