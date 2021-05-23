@@ -26,12 +26,12 @@ const ServiceWorkerWrapper: FC = () => {
 	return (
 		<Snackbar
 			open={showReload}
-			message="A new version is available!"
+			message="Nová verzia stránky k dispozícii!"
 			onClick={reloadPage}
 			anchorOrigin={{ vertical: "top", horizontal: "center" }}
 			action={
 				<Button color="inherit" size="small" onClick={reloadPage}>
-					Reload
+					Obnoviť
 				</Button>
 			}
 		/>

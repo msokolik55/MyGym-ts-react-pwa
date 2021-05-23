@@ -18,7 +18,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Jednoruč jedna ostáva hore",
 		bodyPart: bodyParts.biceps,
-		weights: [0, 0, 0, 0],
+		weights: [1.1, 2.3, 3.4, 4.6],
 		equipments: equipments.dumbbells
 	},
 	{
@@ -122,7 +122,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Rozpažovanie jednoručky v predklone",
 		bodyPart: bodyParts.shoulders,
-		weights: [0, 0, 0, 0],
+		weights: [1.1, 2.3, 3.4, 4.6],
 		equipments: equipments.dumbbells
 	},
 	{
@@ -146,7 +146,7 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Krčenie ramien",
 		bodyPart: bodyParts.shoulders,
-		weights: [0, 0, 0, 0],
+		weights: [2.3, 3.4, 4.6, 5.7],
 		equipments: equipments.dumbbells
 	},
 	//#endregion
@@ -277,19 +277,19 @@ export const exercisesDemo: exercise[] = [
 	{
 		name: "Drepy",
 		bodyPart: bodyParts.legs,
-		weights: [0, 0, 0, 0],
+		weights: [9.1, 11.4, 13.7, 16],
 		equipments: equipments.double
 	},
 	{
 		name: "Rumunsky mrtvy tah s vystretymi nohami",
 		bodyPart: bodyParts.legs,
-		weights: [0, 0, 0, 0],
+		weights: [9.1, 11.4, 13.7, 16],
 		equipments: equipments.dumbbells
 	},
 	{
 		name: "Vypony na lytka",
 		bodyPart: bodyParts.legs,
-		weights: [0, 0, 0, 0],
+		weights: [2.3, 3.4, 4.6, 5.7],
 		equipments: equipments.dumbbells
 	},
 	{
