@@ -269,7 +269,7 @@ export const exercisesDemo: exercise[] = [
 				repetitions: 30
 			}
 		],
-		notes: "https://www.youtube.com/watch?v=uVu9vToACiQ&ab_channel=BarbarianBody"
+		link: "https://www.youtube.com/watch?v=uVu9vToACiQ&ab_channel=BarbarianBody"
 	},
 	//#endregion
 
@@ -338,7 +338,7 @@ export const exercisesDemo: exercise[] = [
 				repetitions: 10
 			}
 		],
-		notes: "https://www.youtube.com/watch?v=uDTfY7OCoDM&list=PLw5yG_YdlsK-hUnxaEcJL9quKuduBKwvM&index=1&ab_channel=FitHeroFitHero"
+		link: "https://www.youtube.com/watch?v=uDTfY7OCoDM&list=PLw5yG_YdlsK-hUnxaEcJL9quKuduBKwvM&index=1&ab_channel=FitHeroFitHero"
 	},
 	{
 		name: "Clutch Life",
@@ -385,7 +385,8 @@ export const exercisesDemo: exercise[] = [
 				repetitions: 20
 			}
 		],
-		notes: "2 serie, po 20s https://www.youtube.com/watch?v=dJlFmxiL11s&ab_channel=Bodybuilding.comBodybuilding.comOveren%C3%A9"
+		notes: "2 serie, po 20s",
+		link: "https://www.youtube.com/watch?v=dJlFmxiL11s&ab_channel=Bodybuilding.comBodybuilding.comOveren%C3%A9"
 	},
 	{
 		name: "Trening YouTube",

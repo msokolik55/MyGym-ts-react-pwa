@@ -17,10 +17,25 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		return Math.floor(Math.random() * arr.length);
 	};
 
+	function renderHyperlink(link: string) {
+		return (
+			<>
+				(
+				<a href={link} target="_blank" rel="noreferrer">
+					odkaz
+				</a>
+				)
+			</>
+		);
+	}
+
 	function renderExercise(exer: exercise) {
 		return (
-			<div>
-				<h4>{exer.name}</h4>
+			<>
+				<h4>
+					{exer.name}
+					{exer.link !== undefined && <> {renderHyperlink(exer.link)}</>}
+				</h4>
 				{exer.notes !== undefined && <p>{exer.notes}</p>}
 
 				{exer.fullProgram === undefined && exer.weights !== undefined && (
@@ -51,7 +66,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 						))}
 					</table>
 				)}
-			</div>
+			</>
 		);
 	}
 
@@ -126,16 +141,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
-			{/* <div style={{ flex: 1 }}>
-				<ul style={{ textAlign: "left" }}>
-					Kombinacie:
-					<li>ramena + biceps + triceps</li>
-					<li>hrudnik + chrbat</li>
-					<li>nohy</li>
-				</ul>
-			</div> */}
-
-			<div className="App" style={{ flex: 5 }}>
+			<div className="App">
 				<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
 				{category !== undefined && (
 					<>

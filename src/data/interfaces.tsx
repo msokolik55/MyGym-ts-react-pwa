@@ -23,6 +23,7 @@ export interface exercise {
 	equipments?: equipments;
 	fullProgram?: fullProgramItem[];
 	notes?: string;
+	link?: string;
 }
 
 export interface history {
