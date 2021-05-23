@@ -5,6 +5,8 @@ import { dbKeys } from "../data/database";
 import { bodyPart, exercise, history } from "../data/interfaces";
 import { equipmentss, categories } from "../data/bodyParts";
 
+import { Button } from "@material-ui/core";
+
 type props = {
 	exercises: exercise[];
 	history: history[];
@@ -141,11 +143,14 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			<div className="App">
-				<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
+				<Button variant="outlined" onClick={() => generateCategory(setTraining)}>
+					Vygeneruj
+				</Button>
 				{category !== undefined && (
 					<>
 						{training.length > 0 && (
-							<button
+							<Button
+								variant="outlined"
 								onClick={() => {
 									setHistory([
 										...history,
@@ -159,7 +164,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 									alert("Pridane do historie");
 								}}>
 								Odtrenovane
-							</button>
+							</Button>
 						)}
 						<h2>{category.name}</h2>
 					</>
