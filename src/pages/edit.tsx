@@ -145,7 +145,7 @@ const EditPage = ({ exercises, setExercises }: props) => {
 				))}
 			</select> */}
 
-			<div style={{ margin: "1em" }}>
+			<div style={{ position: "fixed", top: 10, left: 10 }}>
 				<a id="root" href="/#">
 					{categories.map((cat) => (
 						<a href={`#${cat.key.toString()}`}>
@@ -156,7 +156,7 @@ const EditPage = ({ exercises, setExercises }: props) => {
 				</a>
 			</div>
 
-			<div>
+			<div style={{ marginLeft: 90 }}>
 				{categories.map((cat) => (
 					<div>
 						<h3>
@@ -166,17 +166,26 @@ const EditPage = ({ exercises, setExercises }: props) => {
 								style={{ color: "blue" }}>
 								<Link />
 							</a>
-							{cat.name} (
-							<a href="#root" style={{ color: "blue" }}>
-								<ArrowUpward />
-							</a>
-							)
+							{cat.name}
 						</h3>
 						{exercises
 							.filter((exer) => exer.bodyPart === cat.key)
 							.map((exer) => EditWeights(exer, exercises, setExercises))}
 					</div>
 				))}
+			</div>
+
+			<div
+				style={{
+					position: "fixed",
+					bottom: 66,
+					right: 10,
+					backgroundColor: "orange",
+					borderRadius: 10
+				}}>
+				<a href="#root" style={{ color: "rgba(0, 0, 0, 0.54)" }}>
+					<ArrowUpward />
+				</a>
 			</div>
 		</div>
 	);
