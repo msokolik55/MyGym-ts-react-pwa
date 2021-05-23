@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import { exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 
+import { ArrowUpward, Link } from "@material-ui/icons";
+
 type props = {
 	exercises: exercise[];
 	setExercises: React.Dispatch<React.SetStateAction<exercise[]>>;
@@ -66,6 +68,7 @@ const EditWeights = (
 			{currExercise.weights !== undefined && (
 				<div>
 					<input
+						style={{ width: "3em" }}
 						type="number"
 						ref={inp1}
 						value={currExercise.weights[0]}
@@ -73,6 +76,7 @@ const EditWeights = (
 						disabled
 					/>
 					<input
+						style={{ width: "3em" }}
 						type="number"
 						ref={inp2}
 						value={currExercise.weights[1]}
@@ -80,6 +84,7 @@ const EditWeights = (
 						disabled
 					/>
 					<input
+						style={{ width: "3em" }}
 						type="number"
 						ref={inp3}
 						value={currExercise.weights[2]}
@@ -87,6 +92,7 @@ const EditWeights = (
 						disabled
 					/>
 					<input
+						style={{ width: "3em" }}
 						type="number"
 						ref={inp4}
 						value={currExercise.weights[3]}
@@ -125,7 +131,7 @@ const EditPage = ({ exercises, setExercises }: props) => {
 	// const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
 	return (
-		<div>
+		<div style={{ display: "flex" }}>
 			{/* <select
 				onChange={(e) =>
 					setSelectedCategory(
@@ -139,14 +145,39 @@ const EditPage = ({ exercises, setExercises }: props) => {
 				))}
 			</select> */}
 
-			{categories.map((cat) => (
-				<div>
-					<h3>{cat.name}</h3>
-					{exercises
-						.filter((exer) => exer.bodyPart === cat.key)
-						.map((exer) => EditWeights(exer, exercises, setExercises))}
-				</div>
-			))}
+			<div style={{ margin: "1em" }}>
+				<a id="root" href="/#">
+					{categories.map((cat) => (
+						<a href={`#${cat.key.toString()}`}>
+							{cat.name}
+							<br />
+						</a>
+					))}
+				</a>
+			</div>
+
+			<div>
+				{categories.map((cat) => (
+					<div>
+						<h3>
+							<a
+								id={cat.key.toString()}
+								href={`#${cat.key.toString()}`}
+								style={{ color: "blue" }}>
+								<Link />
+							</a>
+							{cat.name} (
+							<a href="#root" style={{ color: "blue" }}>
+								<ArrowUpward />
+							</a>
+							)
+						</h3>
+						{exercises
+							.filter((exer) => exer.bodyPart === cat.key)
+							.map((exer) => EditWeights(exer, exercises, setExercises))}
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
