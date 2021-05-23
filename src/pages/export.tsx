@@ -2,6 +2,7 @@ import React from "react";
 import { bodyPart, exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 import { bodyParts, equipments } from "../data/enums";
+import { Button } from "@material-ui/core";
 
 type props = {
 	exercises: exercise[];
@@ -65,14 +66,15 @@ const ExportPage = ({ exercises }: props) => {
 
 	return (
 		<div style={{ display: "flex", flexDirection: "column" }}>
-			<button
+			<Button
+				variant="outlined"
 				onClick={() =>
 					navigator.clipboard
 						.writeText(text)
 						.then(() => alert("Skopirovane do schranky"))
 				}>
 				Copy
-			</button>
+			</Button>
 			<div
 				contentEditable={true}
 				style={{
