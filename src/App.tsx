@@ -19,13 +19,14 @@ import ExportPage from "./pages/export";
 import HistoryPage from "./pages/history";
 
 const useStyles = makeStyles({
-	root: {
-		backgroundColor: "orange"
-	},
-	stickToBottom: {
+	navigation: {
 		width: "100%",
 		position: "fixed",
-		bottom: 0
+		bottom: 0,
+		backgroundColor: "orange"
+	},
+	content: {
+		marginBottom: "56px"
 	}
 });
 
@@ -62,7 +63,7 @@ function App() {
 		<Grid>
 			<Router>
 				<BottomNavigation
-					className={`${classes.root} ${classes.stickToBottom}`}
+					className={classes.navigation}
 					value={value}
 					onChange={(event, newValue) => handleChange(newValue)}
 					showLabels>
@@ -96,39 +97,41 @@ function App() {
 				<Link to="/">Trening</Link> | <Link to="/edit">Edit</Link> |{" "}
 				<Link to="/export">Export</Link>
 				</nav> */}
-				<Switch>
-					<Route
-						exact
-						path="/"
-						component={() => (
-							<MainPage
-								exercises={allExer}
-								history={history}
-								setHistory={setHistory}
-							/>
-						)}
-					/>
-					<Route
-						exact
-						path="/edit"
-						component={() => (
-							<EditPage exercises={allExer} setExercises={setAllExer} />
-						)}
-					/>
-					<Route
-						exact
-						path="/export"
-						component={() => <ExportPage exercises={allExer} />}
-					/>
-					<Route
-						exact
-						path="/history"
-						component={() => (
-							<HistoryPage data={history} setData={setHistory} />
-						)}
-					/>
-					<Redirect to="/" />
-				</Switch>
+				<div className={classes.content}>
+					<Switch>
+						<Route
+							exact
+							path="/"
+							component={() => (
+								<MainPage
+									exercises={allExer}
+									history={history}
+									setHistory={setHistory}
+								/>
+							)}
+						/>
+						<Route
+							exact
+							path="/edit"
+							component={() => (
+								<EditPage exercises={allExer} setExercises={setAllExer} />
+							)}
+						/>
+						<Route
+							exact
+							path="/export"
+							component={() => <ExportPage exercises={allExer} />}
+						/>
+						<Route
+							exact
+							path="/history"
+							component={() => (
+								<HistoryPage data={history} setData={setHistory} />
+							)}
+						/>
+						<Redirect to="/" />
+					</Switch>
+				</div>
 			</Router>
 		</Grid>
 	);

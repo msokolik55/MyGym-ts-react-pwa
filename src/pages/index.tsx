@@ -126,14 +126,14 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
-			<div style={{ flex: 1 }}>
+			{/* <div style={{ flex: 1 }}>
 				<ul style={{ textAlign: "left" }}>
 					Kombinacie:
 					<li>ramena + biceps + triceps</li>
 					<li>hrudnik + chrbat</li>
 					<li>nohy</li>
 				</ul>
-			</div>
+			</div> */}
 
 			<div className="App" style={{ flex: 5 }}>
 				<button onClick={() => generateCategory(setTraining)}>Vygeneruj</button>
