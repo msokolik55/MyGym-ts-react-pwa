@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 
-import { Button } from "@material-ui/core";
+import { Button, ListItem, ListItemText, ListItemProps } from "@material-ui/core";
 import { ArrowUpward, Link } from "@material-ui/icons";
 
 type props = {
@@ -132,6 +132,10 @@ const EditWeights = (
 	);
 };
 
+function ListItemLink(props: ListItemProps<"a", { button?: true }>) {
+	return <ListItem button component="a" {...props} />;
+}
+
 const EditPage = ({ exercises, setExercises }: props) => {
 	// const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
@@ -150,18 +154,21 @@ const EditPage = ({ exercises, setExercises }: props) => {
 				))}
 			</select> */}
 
-			<div style={{ position: "fixed", top: 10, left: 10 }}>
+			<div style={{ position: "fixed", top: 10 }}>
 				<a id="root" href="/#">
 					{categories.map((cat) => (
-						<a href={`#${cat.key.toString()}`}>
-							{cat.name}
-							<br />
-						</a>
+						<ListItemLink href={`#${cat.key.toString()}`}>
+							<ListItemText primary={cat.name} />
+						</ListItemLink>
+						// <a href={`#${cat.key.toString()}`}>
+						// 	{cat.name}
+						// 	<br />
+						// </a>
 					))}
 				</a>
 			</div>
 
-			<div style={{ marginLeft: 90 }}>
+			<div style={{ marginLeft: 100 }}>
 				{categories.map((cat) => (
 					<div>
 						<h3>
