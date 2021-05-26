@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { bodyPart, exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 import { bodyParts, equipments } from "../data/enums";
-import { Button } from "@material-ui/core";
+
+import { Button, Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 type props = {
 	exercises: exercise[];
@@ -63,15 +65,14 @@ const ExportPage = ({ exercises }: props) => {
 	};
 
 	let text = exportToString();
+	const [open, setOpen] = useState(false);
 
 	return (
 		<div style={{ display: "flex", flexDirection: "column" }}>
 			<Button
 				variant="outlined"
 				onClick={() =>
-					navigator.clipboard
-						.writeText(text)
-						.then(() => alert("Skopirovane do schranky"))
+					navigator.clipboard.writeText(text).then(() => setOpen(true))
 				}>
 				Copy
 			</Button>
@@ -82,6 +83,17 @@ const ExportPage = ({ exercises }: props) => {
 					minHeight: "2em",
 					borderWidth: 1
 				}}></div>
+
+			<Snackbar
+				open={open}
+				autoHideDuration={2000}
+				anchorOrigin={{
+					horizontal: "center",
+					vertical: "bottom"
+				}}
+				onClose={() => setOpen(false)}>
+				<Alert severity="success">Skopirovane do schranky</Alert>
+			</Snackbar>
 		</div>
 	);
 };

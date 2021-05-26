@@ -5,7 +5,8 @@ import { dbKeys } from "../data/database";
 import { bodyPart, exercise, history } from "../data/interfaces";
 import { equipmentss, categories } from "../data/bodyParts";
 
-import { Button } from "@material-ui/core";
+import { Button, Snackbar } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 type props = {
 	exercises: exercise[];
@@ -140,6 +141,8 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		return result;
 	};
 
+	const [open, setOpen] = useState(false);
+
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			<div className="App">
@@ -149,22 +152,34 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 				{category !== undefined && (
 					<>
 						{training.length > 0 && (
-							<Button
-								variant="outlined"
-								onClick={() => {
-									setHistory([
-										...history,
-										{
-											// date: new Date(),
-											date: formatDate(),
-											category: category.key,
-											exercises: training
-										}
-									]);
-									alert("Pridane do historie");
-								}}>
-								Odtrenovane
-							</Button>
+							<>
+								<Button
+									variant="outlined"
+									onClick={() => {
+										setOpen(true);
+										setHistory([
+											...history,
+											{
+												// date: new Date(),
+												date: formatDate(),
+												category: category.key,
+												exercises: training
+											}
+										]);
+									}}>
+									Odtrenovane
+								</Button>
+								<Snackbar
+									open={open}
+									autoHideDuration={2000}
+									anchorOrigin={{
+										horizontal: "center",
+										vertical: "bottom"
+									}}
+									onClose={() => setOpen(false)}>
+									<Alert severity="success">Pridane do historie</Alert>
+								</Snackbar>
+							</>
 						)}
 						<h2>{category.name}</h2>
 					</>
