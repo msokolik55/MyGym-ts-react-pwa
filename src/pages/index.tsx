@@ -31,7 +31,9 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		);
 	}
 
-	function renderExercise(exer: exercise) {
+	function renderExercise(exerID: number) {
+		const exer = exercises.filter((ex) => ex.id === exerID)[0];
+
 		return (
 			<>
 				<h4>
@@ -72,9 +74,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		);
 	}
 
-	const generateCategory = (
-		setter: React.Dispatch<React.SetStateAction<exercise[]>>
-	) => {
+	const generateCategory = (setter: React.Dispatch<React.SetStateAction<number[]>>) => {
 		const randCateg = randNumber(categories);
 		setCategory(categories[randCateg]);
 		generateExercises(categories[randCateg], setter);
@@ -82,18 +82,18 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 
 	const generateExercises = (
 		category: bodyPart,
-		setter: React.Dispatch<React.SetStateAction<exercise[]>>
+		setter: React.Dispatch<React.SetStateAction<number[]>>
 	) => {
 		let count = 0;
 		let used: number[] = [];
-		let training: exercise[] = [];
+		let training: number[] = [];
 		let choice = exercises.filter((exer) => exer.bodyPart === category.key);
 
 		while (count < category.count && count < choice.length) {
 			let i = randNumber(choice);
 			if (!used.includes(i)) {
 				used.push(i);
-				training.push(choice[i]);
+				training.push(choice[i].id);
 				count++;
 			}
 		}
@@ -101,7 +101,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		setter(training);
 	};
 
-	const [training, setTraining] = useState<exercise[]>([]);
+	const [training, setTraining] = useState<number[]>([]);
 	const [category, setCategory] = useState<bodyPart | undefined>();
 
 	useEffect(() => {
@@ -163,7 +163,12 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 												// date: new Date(),
 												date: formatDate(),
 												category: category.key,
-												exercises: training
+												exercises: training.map(
+													(exerID) =>
+														exercises.filter(
+															(exer) => exer.id === exerID
+														)[0]
+												)
 											}
 										]);
 									}}>
@@ -184,8 +189,8 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 						<h2>{category.name}</h2>
 					</>
 				)}
-				{training.map((exer, id) => (
-					<div key={id}>{renderExercise(exer)}</div>
+				{training.map((exerID, id) => (
+					<div key={id}>{renderExercise(exerID)}</div>
 				))}
 			</div>
 		</div>

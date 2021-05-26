@@ -155,21 +155,20 @@ const EditPage = ({ exercises, setExercises }: props) => {
 			</select> */}
 
 			<div style={{ position: "fixed", top: 10 }}>
-				<a id="root" href="/#">
-					{categories.map((cat) => (
-						<ListItemLink href={`#${cat.key.toString()}`}>
-							<ListItemText primary={cat.name} />
-						</ListItemLink>
-						// <a href={`#${cat.key.toString()}`}>
-						// 	{cat.name}
-						// 	<br />
-						// </a>
-					))}
-				</a>
+				<div id="root"></div>
+				{categories.map((cat) => (
+					<ListItemLink href={`#${cat.key.toString()}`}>
+						<ListItemText primary={cat.name} />
+					</ListItemLink>
+					// <a href={`#${cat.key.toString()}`}>
+					// 	{cat.name}
+					// 	<br />
+					// </a>
+				))}
 			</div>
 
 			<div style={{ marginLeft: 100 }}>
-				{categories.map((cat) => (
+				{categories.map((cat, idx) => (
 					<div>
 						<h3>
 							{cat.name}

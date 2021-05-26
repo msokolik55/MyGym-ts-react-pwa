@@ -46,6 +46,7 @@ const ExportPage = ({ exercises }: props) => {
 
 	const exerciseToString = (exer: exercise, cat: bodyPart) => {
 		let text = "\t{\n";
+		text += "\t\tid: " + exer.id.toString() + ",\n";
 		text += '\t\tname: "' + exer.name + '",\n';
 		text += "\t\tbodyPart: bodyParts." + bodyParts[cat.key] + ",\n";
 

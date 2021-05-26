@@ -17,6 +17,7 @@ export interface fullProgramItem {
 }
 
 export interface exercise {
+	id: number;
 	name: string;
 	bodyPart: bodyParts;
 	weights?: number[];
