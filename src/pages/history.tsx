@@ -20,6 +20,10 @@ const useStyles = makeStyles({
 	flexColumn: {
 		display: "flex",
 		flexDirection: "column"
+	},
+	flexReverse: {
+		display: "flex",
+		flexDirection: "column-reverse"
 	}
 });
 
@@ -27,7 +31,7 @@ const HistoryPage = ({ data, setData }: props) => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.flexColumn}>
+		<div className={classes.flexReverse}>
 			{data !== undefined &&
 				data.map((item, id) => (
 					<div className={classes.flexColumn}>
