@@ -10,7 +10,7 @@ type props = {
 	setExercises: React.Dispatch<React.SetStateAction<exercise[]>>;
 };
 
-const EditWeights = (
+const EditValues = (
 	exer: exercise,
 	allExercises: exercise[],
 	setAllExercises: React.Dispatch<React.SetStateAction<exercise[]>>
@@ -21,6 +21,7 @@ const EditWeights = (
 	const inp2 = useRef<HTMLInputElement>(null);
 	const inp3 = useRef<HTMLInputElement>(null);
 	const inp4 = useRef<HTMLInputElement>(null);
+	// const inpSeries = useRef<HTMLInputElement>(null);
 	const buttEdit = useRef<HTMLButtonElement>(null);
 	const buttSave = useRef<HTMLButtonElement>(null);
 
@@ -56,7 +57,7 @@ const EditWeights = (
 		);
 	};
 
-	const enableFields = (value: boolean) => {
+	const enableWeightsFields = (value: boolean) => {
 		if (inp1.current !== null) inp1.current.disabled = !value;
 		if (inp2.current !== null) inp2.current.disabled = !value;
 		if (inp3.current !== null) inp3.current.disabled = !value;
@@ -65,69 +66,75 @@ const EditWeights = (
 
 	return (
 		<div style={{ marginBottom: "1em" }}>
-			<i>{currExercise.name}</i>
-			{currExercise.weights !== undefined && (
-				<div>
-					<input
-						style={{ width: "3em" }}
-						type="number"
-						value={currExercise.weights[0]}
-						min="0"
-						ref={inp1}
-						onChange={() => handleChange()}
-						disabled
-					/>
-					<input
-						style={{ width: "3em" }}
-						type="number"
-						min="0"
-						ref={inp2}
-						value={currExercise.weights[1]}
-						onChange={() => handleChange()}
-						disabled
-					/>
-					<input
-						style={{ width: "3em" }}
-						type="number"
-						min="0"
-						ref={inp3}
-						value={currExercise.weights[2]}
-						onChange={() => handleChange()}
-						disabled
-					/>
-					<input
-						style={{ width: "3em" }}
-						type="number"
-						min="0"
-						ref={inp4}
-						value={currExercise.weights[3]}
-						onChange={() => handleChange()}
-						disabled
-					/>
-					<Button
-						ref={buttEdit}
-						onClick={() => {
-							if (buttSave.current)
-								buttSave.current.style.display = "inline";
-							if (buttEdit.current) buttEdit.current.style.display = "none";
-							enableFields(true);
-						}}>
-						Zmen
-					</Button>
-					<Button
-						ref={buttSave}
-						style={{ display: "none" }}
-						onClick={() => {
-							enableFields(false);
-							handleSave();
-							if (buttEdit.current)
-								buttEdit.current.style.display = "inline";
-							if (buttSave.current) buttSave.current.style.display = "none";
-						}}>
-						Uloz
-					</Button>
-				</div>
-			)}
+			<div>
+				<i>{currExercise.name}</i>
+			</div>
+			{currExercise.weights !== undefined &&
+				currExercise.fullProgram === undefined && (
+					<>
+						Vahy:{" "}
+						<input
+							style={{ width: "3em" }}
+							type="number"
+							value={currExercise.weights[0]}
+							min="0"
+							ref={inp1}
+							onChange={() => handleChange()}
+							disabled
+						/>
+						<input
+							style={{ width: "3em" }}
+							type="number"
+							min="0"
+							ref={inp2}
+							value={currExercise.weights[1]}
+							onChange={() => handleChange()}
+							disabled
+						/>
+						<input
+							style={{ width: "3em" }}
+							type="number"
+							min="0"
+							ref={inp3}
+							value={currExercise.weights[2]}
+							onChange={() => handleChange()}
+							disabled
+						/>
+						<input
+							style={{ width: "3em" }}
+							type="number"
+							min="0"
+							ref={inp4}
+							value={currExercise.weights[3]}
+							onChange={() => handleChange()}
+							disabled
+						/>
+						<Button
+							ref={buttEdit}
+							onClick={() => {
+								if (buttSave.current)
+									buttSave.current.style.display = "inline";
+								if (buttEdit.current)
+									buttEdit.current.style.display = "none";
+								enableWeightsFields(true);
+							}}>
+							Zmen
+						</Button>
+						<Button
+							ref={buttSave}
+							style={{ display: "none" }}
+							onClick={() => {
+								enableWeightsFields(false);
+								handleSave();
+								if (buttEdit.current)
+									buttEdit.current.style.display = "inline";
+								if (buttSave.current)
+									buttSave.current.style.display = "none";
+							}}>
+							Uloz
+						</Button>
+					</>
+				)}
 		</div>
 	);
 };
@@ -181,7 +188,7 @@ const EditPage = ({ exercises, setExercises }: props) => {
 						</h3>
 						{exercises
 							.filter((exer) => exer.bodyPart === cat.key)
-							.map((exer) => EditWeights(exer, exercises, setExercises))}
+							.map((exer) => EditValues(exer, exercises, setExercises))}
 					</div>
 				))}
 			</div>

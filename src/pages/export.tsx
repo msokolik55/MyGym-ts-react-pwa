@@ -69,6 +69,7 @@ const ExportPage = ({ exercises }: props) => {
 	};
 
 	let text = exportToString();
+	// let text = JSON.stringify(exercises, null, 4);
 	const [open, setOpen] = useState(false);
 
 	return (
