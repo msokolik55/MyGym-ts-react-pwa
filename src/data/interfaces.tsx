@@ -22,7 +22,10 @@ export interface exercise {
 	bodyPart: bodyParts;
 	weights?: number[];
 	equipments?: equipments;
-	fullProgram?: fullProgramItem[];
+	fullProgram?: {
+		series: number;
+		items: fullProgramItem[];
+	};
 	notes?: string;
 	link?: string;
 }

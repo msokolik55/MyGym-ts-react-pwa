@@ -43,7 +43,11 @@ const HistoryPage = ({ data, setData }: props) => {
 							<p>
 								{item.date} {categories[item.category].name}
 								{item.exercises[0].fullProgram !== undefined && (
-									<> ({item.exercises[0].name})</>
+									<>
+										{" "}
+										({item.exercises[0].name},{" serie: "}
+										{item.exercises[0].fullProgram.series})
+									</>
 								)}
 							</p>
 						</div>

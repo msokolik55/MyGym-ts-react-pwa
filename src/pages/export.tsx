@@ -33,14 +33,17 @@ const ExportPage = ({ exercises }: props) => {
 			return "";
 		}
 
-		let text = "\t\tfullProgram: [\n";
-		exer.fullProgram.forEach((item) => {
-			text += "\t\t\t{\n";
-			text += '\t\t\t\tname: "' + item.name + '"\n';
-			text += '\t\t\t\trepetitions: "' + item.repetitions + '"\n';
-			text += "\t\t\t},\n";
+		let text = "\t\tfullProgram: {\n";
+		text += "\t\t\tseries: " + exer.fullProgram.series.toString() + ",\n";
+		text += "\t\t\titems: [\n";
+		exer.fullProgram.items.forEach((item) => {
+			text += "\t\t\t\t{\n";
+			text += '\t\t\t\t\tname: "' + item.name + '"\n';
+			text += '\t\t\t\t\trepetitions: "' + item.repetitions + '"\n';
+			text += "\t\t\t\t},\n";
 		});
-		text += "\t\t],\n";
+		text += "\t\t\t]\n";
+		text += "\t\t},\n";
 		return text;
 	};
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { get, set } from "idb-keyval";
 import { dbKeys } from "../data/database";
 
@@ -62,7 +62,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 							marginRight: "auto",
 							borderSpacing: 10
 						}}>
-						{exer.fullProgram.map((item) => (
+						{exer.fullProgram.items.map((item) => (
 							<tr>
 								<td>{item.name}</td>
 								<td>{item.repetitions}</td>
@@ -143,6 +143,18 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 
 	const [open, setOpen] = useState(false);
 
+	const inpSeries = useRef<HTMLInputElement>(null);
+	const [series, setSeries] = useState(0);
+
+	const getValueFromInput = (inp: React.RefObject<HTMLInputElement>) => {
+		return inp.current !== null ? Number(inp.current.value) : Number(0);
+	};
+
+	const handleInputSeries = () => {
+		let val = getValueFromInput(inpSeries);
+		setSeries(val);
+	};
+
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			<div className="App">
@@ -163,12 +175,22 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 												// date: new Date(),
 												date: formatDate(),
 												category: category.key,
-												exercises: training.map(
-													(exerID) =>
-														exercises.filter(
-															(exer) => exer.id === exerID
-														)[0]
-												)
+												exercises: training.map((exerID) => {
+													let ex = JSON.parse(
+														JSON.stringify(
+															exercises.filter(
+																(exer) =>
+																	exer.id === exerID
+															)[0]
+														)
+													);
+
+													if (ex.fullProgram !== undefined) {
+														ex.fullProgram.series = series;
+													}
+
+													return ex;
+												})
 											}
 										]);
 									}}>
@@ -188,6 +210,16 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 						)}
 						<h2>{category.name}</h2>
 					</>
+				)}
+				{training.length === 1 && (
+					<input
+						style={{ width: "3em" }}
+						type="number"
+						value={series}
+						min="0"
+						ref={inpSeries}
+						onChange={() => handleInputSeries()}
+					/>
 				)}
 				{training.map((exerID, id) => (
 					<div key={id}>{renderExercise(exerID)}</div>

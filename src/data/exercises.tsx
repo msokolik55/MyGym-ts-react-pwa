@@ -263,48 +263,51 @@ export const exercisesDemo: exercise[] = [
 		id: 36,
 		name: "BarbarianBody",
 		bodyPart: bodyParts.calves,
-		fullProgram: [
-			{
-				name: "uni-lateral calf raises",
-				repetitions: 15
-			},
-			{
-				name: "dual inner raises",
-				repetitions: 15
-			},
-			{
-				name: "dual neutral raises",
-				repetitions: 15
-			},
-			{
-				name: "dual outer raises",
-				repetitions: 15
-			},
-			{
-				name: "dual inner raises",
-				repetitions: 15
-			},
-			{
-				name: "dual neutral raises",
-				repetitions: 15
-			},
-			{
-				name: "dual outer raises",
-				repetitions: 15
-			},
-			{
-				name: "uni-lateral bunny hops",
-				repetitions: 20
-			},
-			{
-				name: "speed calf raises",
-				repetitions: 30
-			},
-			{
-				name: "dual bunny hops",
-				repetitions: 30
-			}
-		],
+		fullProgram: {
+			series: 2,
+			items: [
+				{
+					name: "uni-lateral calf raises",
+					repetitions: 15
+				},
+				{
+					name: "dual inner raises",
+					repetitions: 15
+				},
+				{
+					name: "dual neutral raises",
+					repetitions: 15
+				},
+				{
+					name: "dual outer raises",
+					repetitions: 15
+				},
+				{
+					name: "dual inner raises",
+					repetitions: 15
+				},
+				{
+					name: "dual neutral raises",
+					repetitions: 15
+				},
+				{
+					name: "dual outer raises",
+					repetitions: 15
+				},
+				{
+					name: "uni-lateral bunny hops",
+					repetitions: 20
+				},
+				{
+					name: "speed calf raises",
+					repetitions: 30
+				},
+				{
+					name: "dual bunny hops",
+					repetitions: 30
+				}
+			]
+		},
 		link: "https://www.youtube.com/watch?v=uVu9vToACiQ&ab_channel=BarbarianBody"
 	},
 	//#endregion
@@ -345,89 +348,95 @@ export const exercisesDemo: exercise[] = [
 		id: 41,
 		name: "FitHero",
 		bodyPart: bodyParts.core,
-		fullProgram: [
-			{
-				name: "Príťahy kolien v ľahu s dvíhaním panvy",
-				repetitions: 10
-			},
-			{
-				name: "Kyvadlo v ľahu s pokrčenými kolenami",
-				repetitions: 10
-			},
-			{
-				name: "Obojstranné skracovačky s vytáčaním kolien a lakťov k sebe",
-				repetitions: 10
-			},
-			{
-				name: "Sklapovačky v sede do strán",
-				repetitions: 10
-			},
-			{
-				name: "Príťahy kolien v sede na striedačku",
-				repetitions: 10
-			},
-			{
-				name: "Plank s posunom vpred a vzad",
-				repetitions: 10
-			},
-			{
-				name: "Zdvíhanie pokrčených nôh v ľahu na bruchu",
-				repetitions: 10
-			},
-			{
-				name: "Zdvíhanie vystretých nôh v ľahu",
-				repetitions: 10
-			}
-		],
+		fullProgram: {
+			series: 2,
+			items: [
+				{
+					name: "Príťahy kolien v ľahu s dvíhaním panvy",
+					repetitions: 10
+				},
+				{
+					name: "Kyvadlo v ľahu s pokrčenými kolenami",
+					repetitions: 10
+				},
+				{
+					name: "Obojstranné skracovačky s vytáčaním kolien a lakťov k sebe",
+					repetitions: 10
+				},
+				{
+					name: "Sklapovačky v sede do strán",
+					repetitions: 10
+				},
+				{
+					name: "Príťahy kolien v sede na striedačku",
+					repetitions: 10
+				},
+				{
+					name: "Plank s posunom vpred a vzad",
+					repetitions: 10
+				},
+				{
+					name: "Zdvíhanie pokrčených nôh v ľahu na bruchu",
+					repetitions: 10
+				},
+				{
+					name: "Zdvíhanie vystretých nôh v ľahu",
+					repetitions: 10
+				}
+			]
+		},
 		link: "https://www.youtube.com/watch?v=uDTfY7OCoDM&list=PLw5yG_YdlsK-hUnxaEcJL9quKuduBKwvM&index=1&ab_channel=FitHeroFitHero"
 	},
 	{
 		id: 42,
 		name: "Clutch Life",
 		bodyPart: bodyParts.core,
-		fullProgram: [
-			{
-				name: "Russian twist",
-				repetitions: 20
-			},
-			{
-				name: "Plank",
-				repetitions: 20
-			},
-			{
-				name: "Hip raise",
-				repetitions: 20
-			},
-			{
-				name: "Alternating heel touch",
-				repetitions: 20
-			},
-			{
-				name: "Seated scissor kick",
-				repetitions: 20
-			},
-			{
-				name: "Heel touch",
-				repetitions: 20
-			},
-			{
-				name: "Plank step-up",
-				repetitions: 20
-			},
-			{
-				name: "Plank walk-out",
-				repetitions: 20
-			},
-			{
-				name: "Cross crunch",
-				repetitions: 20
-			},
-			{
-				name: "Bicycle crunch",
-				repetitions: 20
-			}
-		],
-		notes: "2 serie, po 20s",
+		fullProgram: {
+			series: 2,
+			items: [
+				{
+					name: "Russian twist",
+					repetitions: 20
+				},
+				{
+					name: "Plank",
+					repetitions: 20
+				},
+				{
+					name: "Hip raise",
+					repetitions: 20
+				},
+				{
+					name: "Alternating heel touch",
+					repetitions: 20
+				},
+				{
+					name: "Seated scissor kick",
+					repetitions: 20
+				},
+				{
+					name: "Heel touch",
+					repetitions: 20
+				},
+				{
+					name: "Plank step-up",
+					repetitions: 20
+				},
+				{
+					name: "Plank walk-out",
+					repetitions: 20
+				},
+				{
+					name: "Cross crunch",
+					repetitions: 20
+				},
+				{
+					name: "Bicycle crunch",
+					repetitions: 20
+				}
+			]
+		},
+		notes: "po 20s",
 		link: "https://www.youtube.com/watch?v=dJlFmxiL11s&ab_channel=Bodybuilding.comBodybuilding.comOveren%C3%A9"
 	},
 	{
