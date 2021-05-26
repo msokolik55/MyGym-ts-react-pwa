@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 
+import { Button, Input } from "@material-ui/core";
 import { ArrowUpward, Link } from "@material-ui/icons";
 
 type props = {
@@ -70,14 +71,16 @@ const EditWeights = (
 					<input
 						style={{ width: "3em" }}
 						type="number"
-						ref={inp1}
 						value={currExercise.weights[0]}
+						min="0"
+						ref={inp1}
 						onChange={() => handleChange()}
 						disabled
 					/>
 					<input
 						style={{ width: "3em" }}
 						type="number"
+						min="0"
 						ref={inp2}
 						value={currExercise.weights[1]}
 						onChange={() => handleChange()}
@@ -86,6 +89,7 @@ const EditWeights = (
 					<input
 						style={{ width: "3em" }}
 						type="number"
+						min="0"
 						ref={inp3}
 						value={currExercise.weights[2]}
 						onChange={() => handleChange()}
@@ -94,12 +98,13 @@ const EditWeights = (
 					<input
 						style={{ width: "3em" }}
 						type="number"
+						min="0"
 						ref={inp4}
 						value={currExercise.weights[3]}
 						onChange={() => handleChange()}
 						disabled
 					/>
-					<button
+					<Button
 						ref={buttEdit}
 						onClick={() => {
 							if (buttSave.current)
@@ -108,8 +113,8 @@ const EditWeights = (
 							enableFields(true);
 						}}>
 						Zmen
-					</button>
-					<button
+					</Button>
+					<Button
 						ref={buttSave}
 						style={{ display: "none" }}
 						onClick={() => {
@@ -120,7 +125,7 @@ const EditWeights = (
 							if (buttSave.current) buttSave.current.style.display = "none";
 						}}>
 						Uloz
-					</button>
+					</Button>
 				</div>
 			)}
 		</div>
@@ -160,13 +165,13 @@ const EditPage = ({ exercises, setExercises }: props) => {
 				{categories.map((cat) => (
 					<div>
 						<h3>
+							{cat.name}
 							<a
 								id={cat.key.toString()}
 								href={`#${cat.key.toString()}`}
-								style={{ color: "blue" }}>
+								style={{ visibility: "hidden" }}>
 								<Link />
 							</a>
-							{cat.name}
 						</h3>
 						{exercises
 							.filter((exer) => exer.bodyPart === cat.key)
