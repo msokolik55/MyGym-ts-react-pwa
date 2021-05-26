@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 
-import { Button, Input } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { ArrowUpward, Link } from "@material-ui/icons";
 
 type props = {

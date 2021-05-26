@@ -25,7 +25,8 @@ const useStyles = makeStyles({
 		width: "100%",
 		position: "fixed",
 		bottom: 0,
-		backgroundColor: "orange"
+		backgroundColor: "orange",
+		zIndex: 1
 	},
 	content: {
 		marginBottom: "56px"
