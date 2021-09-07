@@ -21,11 +21,21 @@ const EditValues = (
 	const inp2 = useRef<HTMLInputElement>(null);
 	const inp3 = useRef<HTMLInputElement>(null);
 	const inp4 = useRef<HTMLInputElement>(null);
+	const chbox = useRef<HTMLInputElement>(null);
 	// const inpSeries = useRef<HTMLInputElement>(null);
 	const buttEdit = useRef<HTMLButtonElement>(null);
 	const buttSave = useRef<HTMLButtonElement>(null);
 
-	const handleChange = () => {
+	//#region Changing via setState
+
+	const changeEnabled = () => {
+		setCurrExercise({
+			...currExercise,
+			enabled: !currExercise.enabled
+		});
+	};
+
+	const changeWeights = () => {
 		let val1 = inp1.current !== null ? Number(inp1.current.value) : Number(0);
 		let val2 = inp2.current !== null ? Number(inp2.current.value) : Number(0);
 		let val3 = inp3.current !== null ? Number(inp3.current.value) : Number(0);
@@ -38,26 +48,18 @@ const EditValues = (
 				});
 	};
 
-	const getWeights = () => {
-		let val1 = inp1.current !== null ? Number(inp1.current.value) : Number(0);
-		let val2 = inp2.current !== null ? Number(inp2.current.value) : Number(0);
-		let val3 = inp3.current !== null ? Number(inp3.current.value) : Number(0);
-		let val4 = inp4.current !== null ? Number(inp4.current.value) : Number(0);
-		return [val1, val2, val3, val4];
-	};
+	//#endregion
 
 	const handleSave = () => {
 		setAllExercises(
 			allExercises.map((ex) => {
-				if (ex === exer) {
-					return { ...exer, weights: getWeights() };
-				}
-				return ex;
+				return ex === exer ? currExercise : ex;
 			})
 		);
 	};
 
-	const enableWeightsFields = (value: boolean) => {
+	const enableFields = (value: boolean) => {
+		if (chbox.current !== null) chbox.current.disabled = !value;
 		if (inp1.current !== null) inp1.current.disabled = !value;
 		if (inp2.current !== null) inp2.current.disabled = !value;
 		if (inp3.current !== null) inp3.current.disabled = !value;
@@ -67,6 +69,13 @@ const EditValues = (
 	return (
 		<div style={{ marginBottom: "1em" }}>
 			<div>
+				<input
+					type="checkbox"
+					checked={currExercise.enabled}
+					onChange={() => changeEnabled()}
+					ref={chbox}
+					disabled
+				/>
 				<i>{currExercise.name}</i>
 			</div>
 			{currExercise.weights !== undefined &&
@@ -79,7 +88,7 @@ const EditValues = (
 							value={currExercise.weights[0]}
 							min="0"
 							ref={inp1}
-							onChange={() => handleChange()}
+							onChange={() => changeWeights()}
 							disabled
 						/>
 						<input
@@ -88,7 +97,7 @@ const EditValues = (
 							min="0"
 							ref={inp2}
 							value={currExercise.weights[1]}
-							onChange={() => handleChange()}
+							onChange={() => changeWeights()}
 							disabled
 						/>
 						<input
@@ -97,7 +106,7 @@ const EditValues = (
 							min="0"
 							ref={inp3}
 							value={currExercise.weights[2]}
-							onChange={() => handleChange()}
+							onChange={() => changeWeights()}
 							disabled
 						/>
 						<input
@@ -106,7 +115,7 @@ const EditValues = (
 							min="0"
 							ref={inp4}
 							value={currExercise.weights[3]}
-							onChange={() => handleChange()}
+							onChange={() => changeWeights()}
 							disabled
 						/>
 						<Button
@@ -116,7 +125,7 @@ const EditValues = (
 									buttSave.current.style.display = "inline";
 								if (buttEdit.current)
 									buttEdit.current.style.display = "none";
-								enableWeightsFields(true);
+								enableFields(true);
 							}}>
 							Zmen
 						</Button>
@@ -124,7 +133,7 @@ const EditValues = (
 							ref={buttSave}
 							style={{ display: "none" }}
 							onClick={() => {
-								enableWeightsFields(false);
+								enableFields(false);
 								handleSave();
 								if (buttEdit.current)
 									buttEdit.current.style.display = "inline";

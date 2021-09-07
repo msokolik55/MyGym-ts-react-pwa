@@ -87,7 +87,9 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 		let count = 0;
 		let used: number[] = [];
 		let training: number[] = [];
-		let choice = exercises.filter((exer) => exer.bodyPart === category.key);
+		let choice = exercises.filter(
+			(exer) => exer.bodyPart === category.key && exer.enabled
+		);
 
 		while (count < category.count && count < choice.length) {
 			let i = randNumber(choice);

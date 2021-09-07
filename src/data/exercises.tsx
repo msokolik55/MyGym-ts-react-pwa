@@ -5,13 +5,15 @@ export const exercisesDemo: exercise[] = [
 	//#region Biceps
 	{
 		id: 1,
+		enabled: true,
 		name: "Obojruč",
 		bodyPart: bodyParts.biceps,
-		weights: [3.4, 4.6, 5.7, 6.9],
+		weights: [3.4, 5.7, 6.9, 9.3],
 		equipments: equipments.double
 	},
 	{
 		id: 2,
+		enabled: true,
 		name: "Jednoruč obidve naraz",
 		bodyPart: bodyParts.biceps,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -19,6 +21,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 3,
+		enabled: true,
 		name: "Jednoruč jedna ostáva hore",
 		bodyPart: bodyParts.biceps,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -26,6 +29,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 4,
+		enabled: true,
 		name: "Nižší sklon na lavičke",
 		bodyPart: bodyParts.biceps,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -33,6 +37,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 5,
+		enabled: true,
 		name: "Kladivo k prsiam",
 		bodyPart: bodyParts.biceps,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -40,6 +45,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 6,
+		enabled: true,
 		name: "Koncentrovaný bicepsový zdvih",
 		bodyPart: bodyParts.biceps,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -50,32 +56,37 @@ export const exercisesDemo: exercise[] = [
 	//#region Triceps
 	{
 		id: 7,
+		enabled: true,
 		name: "Kľuky na bradlách",
 		bodyPart: bodyParts.triceps
 	},
 	{
 		id: 8,
+		enabled: true,
 		name: "Činka za chrbtom",
 		bodyPart: bodyParts.triceps,
-		weights: [2.3, 3.4, 4.6, 5.7],
+		weights: [3.4, 4.6, 5.7, 6.9],
 		equipments: equipments.dumbbells
 	},
 	{
 		id: 9,
+		enabled: true,
 		name: "Tricepsový bench",
 		bodyPart: bodyParts.triceps,
-		weights: [4.5, 6.8, 9.1, 11.4],
+		weights: [9.1, 11.4, 13.7, 16],
 		equipments: equipments.double
 	},
 	{
 		id: 10,
+		enabled: true,
 		name: "Zospodu nad seba",
 		bodyPart: bodyParts.triceps,
-		weights: [0, 0, 0, 0],
+		weights: [1, 2, 2, 2],
 		equipments: equipments.machine
 	},
 	{
 		id: 11,
+		enabled: true,
 		name: "Sťahovanie kladky na úzko v miernom predklone",
 		bodyPart: bodyParts.triceps,
 		weights: [1, 2, 3, 4],
@@ -83,6 +94,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 12,
+		enabled: true,
 		name: "Sťahovanie kladky s V držiakom",
 		bodyPart: bodyParts.triceps,
 		weights: [1, 2, 3, 3],
@@ -90,6 +102,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 13,
+		enabled: true,
 		name: "Francúzske tlaky s jednoruč",
 		bodyPart: bodyParts.triceps,
 		weights: [1.1, 2.3, 3.4, 3.4],
@@ -97,13 +110,15 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 14,
+		enabled: true,
 		name: "Predpažovanie spoza hlavy s lanovým",
 		bodyPart: bodyParts.triceps,
-		weights: [1, 2, 3, 4],
+		weights: [1, 2, 3, 3],
 		equipments: equipments.machine
 	},
 	{
 		id: 15,
+		enabled: true,
 		name: "Tricepsové zhyby na lavičke",
 		bodyPart: bodyParts.triceps
 	},
@@ -112,6 +127,7 @@ export const exercisesDemo: exercise[] = [
 	//#region Ramena
 	{
 		id: 16,
+		enabled: true,
 		name: "Predpažovanie s vytočením",
 		bodyPart: bodyParts.shoulders,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -119,6 +135,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 17,
+		enabled: true,
 		name: "Predpažovanie priame",
 		bodyPart: bodyParts.shoulders,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -126,20 +143,23 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 18,
+		enabled: true,
 		name: "Tlaky obojručkou nad hlavu",
 		bodyPart: bodyParts.shoulders,
-		weights: [3.4, 5.7, 8, 10.3],
+		weights: [4.5, 6.8, 9.1, 11.4],
 		equipments: equipments.double
 	},
 	{
 		id: 19,
+		enabled: true,
 		name: "Príťahy obojručky k brade",
 		bodyPart: bodyParts.shoulders,
-		weights: [3.4, 5.7, 8, 10.3],
+		weights: [5.7, 8, 10.3, 12.6],
 		equipments: equipments.double
 	},
 	{
 		id: 20,
+		enabled: true,
 		name: "Rozpažovanie jednoručky v predklone",
 		bodyPart: bodyParts.shoulders,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -147,13 +167,15 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 21,
-		name: "Tlaky jednoruckou nad hlavu",
+		enabled: true,
+		name: "Tlaky jednoručkou nad hlavu",
 		bodyPart: bodyParts.shoulders,
 		weights: [0, 0, 0, 0],
 		equipments: equipments.dumbbells
 	},
 	{
 		id: 22,
+		enabled: true,
 		name: "Tlaky jednoručkou nad hlavu s vytáčaním",
 		bodyPart: bodyParts.shoulders,
 		weights: [0, 0, 0, 0],
@@ -161,6 +183,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 23,
+		enabled: true,
 		name: "Predpažovanie s obojručkou",
 		bodyPart: bodyParts.shoulders,
 		weights: [0, 0, 0, 0],
@@ -168,6 +191,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 24,
+		enabled: true,
 		name: "Krčenie ramien",
 		bodyPart: bodyParts.shoulders,
 		weights: [2.3, 3.4, 4.6, 5.7],
@@ -178,6 +202,7 @@ export const exercisesDemo: exercise[] = [
 	//#region Hrudnik
 	{
 		id: 25,
+		enabled: true,
 		name: "Bench press jednoručky",
 		bodyPart: bodyParts.chest,
 		weights: [2.3, 3.4, 4.6, 5.7],
@@ -185,6 +210,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 26,
+		enabled: true,
 		name: "Bench press jednoručky - zo strán pred seba",
 		bodyPart: bodyParts.chest,
 		weights: [1.1, 2.3, 3.4, 4.6],
@@ -192,13 +218,15 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 27,
+		enabled: true,
 		name: "Stroj - výtlaky pred seba",
 		bodyPart: bodyParts.chest,
-		weights: [2, 3, 4, 5],
+		weights: [4, 5, 6, 7],
 		equipments: equipments.machine
 	},
 	{
 		id: 28,
+		enabled: true,
 		name: "Stroj - zo strán pred seba",
 		bodyPart: bodyParts.chest,
 		weights: [2, 3, 4, 5],
@@ -209,6 +237,7 @@ export const exercisesDemo: exercise[] = [
 	//#region Chrbat
 	{
 		id: 29,
+		enabled: true,
 		name: "Mŕtvy ťah",
 		bodyPart: bodyParts.back,
 		weights: [4.5, 6.8, 9.1, 11.4],
@@ -216,6 +245,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 30,
+		enabled: true,
 		name: "Sťahovanie hornej kladky podhmatom",
 		bodyPart: bodyParts.back,
 		weights: [2, 3, 4, 5],
@@ -223,6 +253,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 31,
+		enabled: true,
 		name: "S V držiakom",
 		bodyPart: bodyParts.back,
 		weights: [0, 0, 0, 0],
@@ -230,6 +261,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 32,
+		enabled: true,
 		name: "Príťahy nadhmatom v predklone",
 		bodyPart: bodyParts.back,
 		weights: [4.5, 5.6, 6.8, 7.9],
@@ -237,13 +269,15 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 33,
+		enabled: true,
 		name: "Veslovanie",
 		bodyPart: bodyParts.back,
-		weights: [2, 3, 4, 5],
+		weights: [3, 4, 5, 6],
 		equipments: equipments.machine
 	},
 	{
 		id: 34,
+		enabled: true,
 		name: "Krčenie ramien",
 		bodyPart: bodyParts.back,
 		weights: [2.3, 3.4, 4.6, 5.7],
@@ -251,6 +285,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 35,
+		enabled: true,
 		name: "Hyperextenzie",
 		bodyPart: bodyParts.back,
 		weights: [0, 0, 0, 0],
@@ -261,6 +296,7 @@ export const exercisesDemo: exercise[] = [
 	//#region Lytka
 	{
 		id: 36,
+		enabled: true,
 		name: "BarbarianBody",
 		bodyPart: bodyParts.calves,
 		fullProgram: {
@@ -315,30 +351,34 @@ export const exercisesDemo: exercise[] = [
 	//#region Nohy
 	{
 		id: 37,
+		enabled: true,
 		name: "Drepy",
 		bodyPart: bodyParts.legs,
-		weights: [9.1, 11.4, 13.7, 16],
+		weights: [14.6, 16.9, 19.2, 21.5],
 		equipments: equipments.double
 	},
 	{
 		id: 38,
+		enabled: true,
 		name: "Rumunsky mrtvy tah s vystretymi nohami",
 		bodyPart: bodyParts.legs,
-		weights: [9.1, 11.4, 13.7, 16],
+		weights: [12.3, 14.5, 16.8, 19.1],
 		equipments: equipments.dumbbells
 	},
 	{
 		id: 39,
+		enabled: true,
 		name: "Vypony na lytka",
 		bodyPart: bodyParts.legs,
-		weights: [2.3, 3.4, 4.6, 5.7],
+		weights: [3.4, 4.6, 5.7, 6.9],
 		equipments: equipments.dumbbells
 	},
 	{
 		id: 40,
+		enabled: true,
 		name: "Vypady",
 		bodyPart: bodyParts.legs,
-		weights: [0, 0, 0, 0],
+		weights: [1.1, 2.3, 3.4, 4.6],
 		equipments: equipments.dumbbells
 	},
 	//#endregion
@@ -346,6 +386,7 @@ export const exercisesDemo: exercise[] = [
 	//#region Core
 	{
 		id: 41,
+		enabled: true,
 		name: "FitHero",
 		bodyPart: bodyParts.core,
 		fullProgram: {
@@ -389,6 +430,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 42,
+		enabled: true,
 		name: "Clutch Life",
 		bodyPart: bodyParts.core,
 		fullProgram: {
@@ -441,6 +483,7 @@ export const exercisesDemo: exercise[] = [
 	},
 	{
 		id: 43,
+		enabled: true,
 		name: "Trening YouTube",
 		bodyPart: bodyParts.core
 	}
