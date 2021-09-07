@@ -51,18 +51,26 @@ export const categories: bodyPart[] = [
 export const equipmentss: equipment[] = [
 	{
 		key: equipments.none,
-		name: "Ziadne"
+		name: "Žiadne"
 	},
 	{
 		key: equipments.dumbbells,
-		name: "Jednorucky"
+		name: "Jednoručky"
 	},
 	{
 		key: equipments.double,
-		name: "Obojrucka"
+		name: "Obojručka"
 	},
 	{
 		key: equipments.machine,
 		name: "Stroj"
+	},
+	{
+		key: equipments.trx,
+		name: "TRX"
+	},
+	{
+		key: equipments.bar,
+		name: "Hrazda"
 	}
 ];

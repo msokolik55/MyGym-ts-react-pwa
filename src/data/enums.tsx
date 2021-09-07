@@ -13,5 +13,7 @@ export enum equipments {
 	none,
 	dumbbells,
 	double,
-	machine
+	machine,
+	trx,
+	bar
 }
