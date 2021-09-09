@@ -1,13 +1,44 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, RefObject } from "react";
 import { exercise } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 
-import { Button, ListItem, ListItemText, ListItemProps } from "@material-ui/core";
-import { ArrowUpward, Link } from "@material-ui/icons";
+import {
+	Grid,
+	IconButton,
+	ListItem,
+	ListItemText,
+	ListItemProps,
+	SwipeableDrawer
+} from "@material-ui/core";
+import { ArrowUpward, Link, Edit, Save, Menu } from "@material-ui/icons";
+
+//#region Type
 
 type props = {
 	exercises: exercise[];
 	setExercises: React.Dispatch<React.SetStateAction<exercise[]>>;
+};
+
+//#endregion
+
+//#region Components
+
+const InputWeight = (
+	value: number,
+	refInp: RefObject<HTMLInputElement>,
+	saving: () => void
+) => {
+	return (
+		<input
+			style={{ width: "3em" }}
+			type="number"
+			value={value}
+			min="0"
+			ref={refInp}
+			onChange={saving}
+			disabled
+		/>
+	);
 };
 
 const EditValues = (
@@ -17,14 +48,21 @@ const EditValues = (
 ) => {
 	const [currExercise, setCurrExercise] = useState(exer);
 
+	//#region Refs
+
+	const chbox = useRef<HTMLInputElement>(null);
+
 	const inp1 = useRef<HTMLInputElement>(null);
 	const inp2 = useRef<HTMLInputElement>(null);
 	const inp3 = useRef<HTMLInputElement>(null);
 	const inp4 = useRef<HTMLInputElement>(null);
-	const chbox = useRef<HTMLInputElement>(null);
+	const inputs = [inp1, inp2, inp3, inp4];
+
 	// const inpSeries = useRef<HTMLInputElement>(null);
 	const buttEdit = useRef<HTMLButtonElement>(null);
 	const buttSave = useRef<HTMLButtonElement>(null);
+
+	//#endregion
 
 	//#region Changing via setState
 
@@ -66,85 +104,67 @@ const EditValues = (
 		if (inp4.current !== null) inp4.current.disabled = !value;
 	};
 
+	const switchButtons = (
+		buttToDisplay: RefObject<HTMLButtonElement>,
+		buttToHide: RefObject<HTMLButtonElement>
+	) => {
+		if (buttToDisplay.current) buttToDisplay.current.style.display = "inline";
+		if (buttToHide.current) buttToHide.current.style.display = "none";
+	};
+
 	return (
-		<div style={{ marginBottom: "1em" }}>
-			<div>
-				<input
-					type="checkbox"
-					checked={currExercise.enabled}
-					onChange={() => changeEnabled()}
-					ref={chbox}
-					disabled
-				/>
-				<i>{currExercise.name}</i>
-			</div>
-			{currExercise.weights !== undefined &&
-				currExercise.fullProgram === undefined && (
-					<>
-						Vahy:{" "}
+		<Grid container alignItems="center" style={{ marginBottom: "1em" }}>
+			<Grid item>
+				<IconButton
+					ref={buttEdit}
+					onClick={() => {
+						enableFields(true);
+						switchButtons(buttSave, buttEdit);
+					}}>
+					<Edit />
+				</IconButton>
+				<IconButton
+					ref={buttSave}
+					style={{ display: "none" }}
+					onClick={() => {
+						enableFields(false);
+						handleSave();
+						switchButtons(buttEdit, buttSave);
+					}}>
+					<Save />
+				</IconButton>
+			</Grid>
+
+			<Grid item>
+				<Grid container direction="column">
+					<Grid style={{ marginBottom: ".4em" }}>
 						<input
-							style={{ width: "3em" }}
-							type="number"
-							value={currExercise.weights[0]}
-							min="0"
-							ref={inp1}
-							onChange={() => changeWeights()}
+							type="checkbox"
+							checked={currExercise.enabled}
+							onChange={() => changeEnabled()}
+							ref={chbox}
 							disabled
 						/>
-						<input
-							style={{ width: "3em" }}
-							type="number"
-							min="0"
-							ref={inp2}
-							value={currExercise.weights[1]}
-							onChange={() => changeWeights()}
-							disabled
-						/>
-						<input
-							style={{ width: "3em" }}
-							type="number"
-							min="0"
-							ref={inp3}
-							value={currExercise.weights[2]}
-							onChange={() => changeWeights()}
-							disabled
-						/>
-						<input
-							style={{ width: "3em" }}
-							type="number"
-							min="0"
-							ref={inp4}
-							value={currExercise.weights[3]}
-							onChange={() => changeWeights()}
-							disabled
-						/>
-						<Button
-							ref={buttEdit}
-							onClick={() => {
-								if (buttSave.current)
-									buttSave.current.style.display = "inline";
-								if (buttEdit.current)
-									buttEdit.current.style.display = "none";
-								enableFields(true);
-							}}>
-							Zmen
-						</Button>
-						<Button
-							ref={buttSave}
-							style={{ display: "none" }}
-							onClick={() => {
-								enableFields(false);
-								handleSave();
-								if (buttEdit.current)
-									buttEdit.current.style.display = "inline";
-								if (buttSave.current)
-									buttSave.current.style.display = "none";
-							}}>
-							Uloz
-						</Button>
-					</>
-				)}
-		</div>
+						<i>{currExercise.name}</i>
+					</Grid>
+
+					{currExercise.weights !== undefined && (
+						<Grid>
+							Vahy:{" "}
+							{inputs.map((inp, idx) => {
+								if (currExercise.weights !== undefined)
+									return InputWeight(
+										currExercise.weights[idx],
+										inp,
+										() => changeWeights()
+									);
+								return undefined;
+							})}
+						</Grid>
+					)}
+				</Grid>
+			</Grid>
+		</Grid>
 	);
 };
 
@@ -152,8 +172,11 @@ function ListItemLink(props: ListItemProps<"a", { button?: true }>) {
 	return <ListItem button component="a" {...props} />;
 }
 
+//#endregion
+
 const EditPage = ({ exercises, setExercises }: props) => {
 	// const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+	const [drawer, setDrawer] = useState(false);
 
 	return (
 		<div style={{ display: "flex" }}>
@@ -170,22 +193,21 @@ const EditPage = ({ exercises, setExercises }: props) => {
 				))}
 			</select> */}
 
-			<div style={{ position: "fixed", top: 10 }}>
-				<div id="root"></div>
-				{categories.map((cat) => (
-					<ListItemLink href={`#${cat.key.toString()}`}>
+			<SwipeableDrawer
+				anchor="right"
+				open={drawer}
+				onOpen={() => setDrawer(true)}
+				onClose={() => setDrawer(false)}>
+				{categories.map((cat, idx) => (
+					<ListItemLink key={"category-" + idx} href={`#${cat.key.toString()}`}>
 						<ListItemText primary={cat.name} />
 					</ListItemLink>
-					// <a href={`#${cat.key.toString()}`}>
-					// 	{cat.name}
-					// 	<br />
-					// </a>
 				))}
-			</div>
+			</SwipeableDrawer>
 
-			<div style={{ marginLeft: 100 }}>
-				{categories.map((cat, idx) => (
-					<div>
+			<div style={{ marginLeft: "1em" }}>
+				{categories.map((cat) => (
+					<>
 						<h3>
 							{cat.name}
 							<a
@@ -198,10 +220,19 @@ const EditPage = ({ exercises, setExercises }: props) => {
 						{exercises
 							.filter((exer) => exer.bodyPart === cat.key)
 							.map((exer) => EditValues(exer, exercises, setExercises))}
-					</div>
+					</>
 				))}
 			</div>
 
+			<IconButton
+				style={{
+					position: "fixed",
+					top: 0,
+					right: 0
+				}}
+				onClick={() => setDrawer(true)}>
+				<Menu />
+			</IconButton>
 			<div
 				style={{
 					position: "fixed",
