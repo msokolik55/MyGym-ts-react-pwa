@@ -51,6 +51,13 @@ export const exercisesDemo: exercise[] = [
 		weights: [1.1, 2.3, 3.4, 4.6],
 		equipments: equipments.dumbbells
 	},
+	{
+		id: 58,
+		enabled: true,
+		name: "TRX pritahy (TRX pred sebou)",
+		bodyPart: bodyParts.biceps,
+		equipments: equipments.trx
+	},
 	//#endregion
 
 	//#region Triceps
@@ -121,6 +128,20 @@ export const exercisesDemo: exercise[] = [
 		enabled: true,
 		name: "Tricepsové zhyby na lavičke",
 		bodyPart: bodyParts.triceps
+	},
+	{
+		id: 51,
+		enabled: true,
+		name: "Predpažovanie spoza hlavy",
+		bodyPart: bodyParts.triceps,
+		equipments: equipments.trx
+	},
+	{
+		id: 57,
+		enabled: true,
+		name: "Pritahy s vystretymi rukami (TRX pred sebou)",
+		bodyPart: bodyParts.triceps,
+		equipments: equipments.trx
 	},
 	//#endregion
 
@@ -231,6 +252,55 @@ export const exercisesDemo: exercise[] = [
 		bodyPart: bodyParts.chest,
 		weights: [2, 3, 4, 5],
 		equipments: equipments.machine
+	},
+	{
+		id: 49,
+		enabled: true,
+		name: "TRX press (TRX za sebou)",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
+	},
+	{
+		id: 50,
+		enabled: true,
+		name: "Predpazovanie (TRX za sebou)",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
+	},
+	{
+		id: 52,
+		enabled: true,
+		name: "Kliky na zemi - nohy v TRX",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
+	},
+	{
+		id: 53,
+		enabled: true,
+		name: "Kliky na zemi - nohy viac vzadu v TRX",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
+	},
+	{
+		id: 54,
+		enabled: true,
+		name: "Veslovanie k hrudi (TRX pred sebou)",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
+	},
+	{
+		id: 56,
+		enabled: true,
+		name: "Veslovanie k hrudi (TRX pred sebou) - 1 ruka",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
+	},
+	{
+		id: 55,
+		enabled: true,
+		name: "Veslovanie k ramenam (TRX pred sebou)",
+		bodyPart: bodyParts.chest,
+		equipments: equipments.trx
 	},
 	//#endregion
 
@@ -381,14 +451,49 @@ export const exercisesDemo: exercise[] = [
 		weights: [1.1, 2.3, 3.4, 4.6],
 		equipments: equipments.dumbbells
 	},
+	{
+		id: 44,
+		enabled: true,
+		name: "Drep - vyskok",
+		bodyPart: bodyParts.legs,
+		equipments: equipments.trx
+	},
+	{
+		id: 45,
+		enabled: true,
+		name: "Drepy na 1 nohe",
+		bodyPart: bodyParts.legs,
+		equipments: equipments.trx
+	},
+	{
+		id: 48,
+		enabled: true,
+		name: "Korculiar",
+		bodyPart: bodyParts.legs,
+		equipments: equipments.trx
+	},
+	{
+		id: 46,
+		enabled: true,
+		name: "Vypad - vyskok",
+		bodyPart: bodyParts.legs,
+		equipments: equipments.trx
+	},
+	{
+		id: 47,
+		enabled: true,
+		name: "Vypady do stran",
+		bodyPart: bodyParts.legs,
+		equipments: equipments.trx
+	},
 	//#endregion
 
-	//#region Core
+	//#region CoreProgram
 	{
 		id: 41,
 		enabled: true,
 		name: "FitHero",
-		bodyPart: bodyParts.core,
+		bodyPart: bodyParts.coreRoutine,
 		fullProgram: {
 			series: 2,
 			items: [
@@ -432,7 +537,7 @@ export const exercisesDemo: exercise[] = [
 		id: 42,
 		enabled: true,
 		name: "Clutch Life",
-		bodyPart: bodyParts.core,
+		bodyPart: bodyParts.coreRoutine,
 		fullProgram: {
 			series: 2,
 			items: [
@@ -485,7 +590,80 @@ export const exercisesDemo: exercise[] = [
 		id: 43,
 		enabled: true,
 		name: "Trening YouTube",
-		bodyPart: bodyParts.core
+		bodyPart: bodyParts.coreRoutine
+	},
+	{
+		id: 59,
+		enabled: true,
+		name: "Kolena k hrudi",
+		bodyPart: bodyParts.core,
+		equipments: equipments.trx
+	},
+	{
+		id: 60,
+		enabled: true,
+		name: "Kolena k hrudi do stran",
+		bodyPart: bodyParts.core,
+		equipments: equipments.trx
+	},
+	{
+		id: 61,
+		enabled: true,
+		name: "Bocny plank",
+		bodyPart: bodyParts.core,
+		equipments: equipments.trx
+	},
+	{
+		id: 62,
+		enabled: true,
+		name: "Strieska",
+		bodyPart: bodyParts.core,
+		equipments: equipments.trx
+	},
+	{
+		id: 63,
+		enabled: true,
+		name: "Spustenie do strany",
+		bodyPart: bodyParts.core,
+		equipments: equipments.trx
+	},
+	//#endregion
+
+	//#region Cardio,
+	{
+		id: 64,
+		enabled: true,
+		name: "Beh na mieste",
+		bodyPart: bodyParts.cardio,
+		equipments: equipments.trx
+	},
+	{
+		id: 65,
+		enabled: true,
+		name: "Anglicaky - 1 noha zavesena",
+		bodyPart: bodyParts.cardio,
+		equipments: equipments.trx
+	},
+	{
+		id: 66,
+		enabled: true,
+		name: "Star jumps",
+		bodyPart: bodyParts.cardio,
+		equipments: equipments.trx
+	},
+	{
+		id: 67,
+		enabled: true,
+		name: "Vypad - skok",
+		bodyPart: bodyParts.cardio,
+		equipments: equipments.trx
+	},
+	{
+		id: 68,
+		enabled: true,
+		name: "Drepy na stranach",
+		bodyPart: bodyParts.cardio,
+		equipments: equipments.trx
 	}
 	//#endregion
 ];

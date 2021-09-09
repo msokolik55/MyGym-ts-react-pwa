@@ -44,6 +44,11 @@ export const categories: bodyPart[] = [
 	{
 		key: bodyParts.core,
 		name: "Core",
+		count: 4
+	},
+	{
+		key: bodyParts.coreRoutine,
+		name: "Core program",
 		count: 1
 	}
 ];
