@@ -5,7 +5,13 @@ import { get, set } from "idb-keyval";
 
 // Material-UI
 import { Grid, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
-import { FitnessCenter, Build, ImportExport, History } from "@material-ui/icons";
+import {
+	FitnessCenter,
+	Build,
+	ImportExport,
+	History,
+	BugReport
+} from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 
 // data
@@ -19,6 +25,7 @@ import MainPage from "./pages";
 import EditPage from "./pages/edit";
 import ExportPage from "./pages/export";
 import HistoryPage from "./pages/history";
+import TestPage from "./pages/test";
 
 const useStyles = makeStyles({
 	navigation: {
@@ -95,6 +102,12 @@ function App() {
 						label="História"
 						icon={<History />}
 					/>
+					<BottomNavigationAction
+						component={Link}
+						to={pagesRoutes.test}
+						label="!!!"
+						icon={<BugReport />}
+					/>
 				</BottomNavigation>
 
 				{/* <nav>
@@ -132,6 +145,11 @@ function App() {
 							component={() => (
 								<HistoryPage data={history} setData={setHistory} />
 							)}
+						/>
+						<Route
+							exact
+							path={pagesRoutes.test}
+							component={() => <TestPage />}
 						/>
 						<Redirect to={pagesRoutes.home} />
 					</Switch>

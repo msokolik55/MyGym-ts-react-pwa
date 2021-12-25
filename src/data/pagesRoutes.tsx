@@ -3,5 +3,6 @@ export const pagesRoutes = {
 	index: "/index",
 	edit: "/edit",
 	export: "/export",
-	history: "/history"
+	history: "/history",
+	test: "/test"
 };
