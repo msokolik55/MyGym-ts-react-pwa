@@ -92,6 +92,7 @@ function App() {
 		set(dbKeys.history, history);
 	}, [history]);
 
+	const [title, setTitle] = useState("Tréning");
 	const [drawer, setDrawer] = useState(false);
 
 	return (
@@ -109,7 +110,7 @@ function App() {
 						<Menu />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
-						Mini variant drawer
+						{title}
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -135,9 +136,10 @@ function App() {
 						{Routes.map((prop, key) => {
 							return (
 								<NavLink
+									key={key}
 									to={prop.path}
 									style={{ textDecoration: "none" }}
-									key={key}>
+									onClick={() => setTitle(prop.name)}>
 									<ListItem>
 										{/* <MenuItem selected={activeRoute(prop.path)}> */}
 										<ListItemIcon>{prop.icon}</ListItemIcon>
