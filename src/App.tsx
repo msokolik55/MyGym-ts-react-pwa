@@ -24,7 +24,8 @@ import {
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	SwipeableDrawer
+	SwipeableDrawer,
+	MenuItem
 } from "@material-ui/core";
 import {
 	// FitnessCenter,
@@ -142,11 +143,11 @@ function App() {
 									to={prop.path}
 									style={{ textDecoration: "none" }}
 									onClick={() => setTitle(prop.name)}>
-									<ListItem>
+									<MenuItem>
 										{/* <MenuItem selected={activeRoute(prop.path)}> */}
 										<ListItemIcon>{prop.icon}</ListItemIcon>
 										<ListItemText primary={prop.name} />
-									</ListItem>
+									</MenuItem>
 								</NavLink>
 							);
 						})}
