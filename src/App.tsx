@@ -97,7 +97,9 @@ function App() {
 
 	return (
 		<Grid>
-			<AppBar position="sticky">
+			<AppBar
+				position="sticky"
+				style={{ backgroundColor: "orange", color: "rgb(0, 0, 0, 0.6)" }}>
 				<Toolbar>
 					<IconButton
 						color="inherit"
