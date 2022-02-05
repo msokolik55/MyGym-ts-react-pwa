@@ -227,7 +227,7 @@ const EditPage = ({ exercises, setExercises }: props) => {
 			<IconButton
 				style={{
 					position: "fixed",
-					top: 0,
+					// top: 0,
 					right: 0
 				}}
 				onClick={() => setDrawer(true)}>

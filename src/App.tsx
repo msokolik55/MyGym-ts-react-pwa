@@ -1,18 +1,47 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+	// Link,
+	NavLink
+} from "react-router-dom";
 import { get, set } from "idb-keyval";
 
 // Material-UI
-import { Grid, BottomNavigation, BottomNavigationAction } from "@material-ui/core";
-import { FitnessCenter, Build, ImportExport, History } from "@material-ui/icons";
+import {
+	Grid,
+	// BottomNavigation,
+	// BottomNavigationAction,
+	AppBar,
+	Toolbar,
+	Typography,
+	IconButton,
+	Divider,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	SwipeableDrawer,
+	MenuItem
+} from "@material-ui/core";
+import {
+	// FitnessCenter,
+	// Build,
+	// ImportExport,
+	// History,
+	Menu,
+	ChevronLeft
+} from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 
 // data
 import { exercisesDemo } from "./data/exercises";
 import { history } from "./data/interfaces";
 import { dbKeys } from "./data/database";
-import { pagesRoutes } from "./data/pagesRoutes";
+import { pagesRoutes, Routes } from "./data/pagesRoutes";
 
 // pages
 import MainPage from "./pages";
@@ -30,6 +59,7 @@ const useStyles = makeStyles({
 	},
 	content: {
 		marginBottom: "56px"
+		// marginTop: "56px"
 	}
 });
 
@@ -63,9 +93,68 @@ function App() {
 		set(dbKeys.history, history);
 	}, [history]);
 
+	const [title, setTitle] = useState("Tréning");
+	const [drawer, setDrawer] = useState(false);
+
 	return (
 		<Grid>
+			<AppBar
+				position="sticky"
+				style={{ backgroundColor: "orange", color: "rgb(0, 0, 0, 0.6)" }}>
+				<Toolbar>
+					<IconButton
+						color="inherit"
+						onClick={() => setDrawer(true)}
+						// sx={{
+						// 	marginRight: "36px",
+						// 	...(drawer && { display: "none" })
+						// }}
+					>
+						<Menu />
+					</IconButton>
+					<Typography variant="h6" noWrap component="div">
+						{title}
+					</Typography>
+				</Toolbar>
+			</AppBar>
 			<Router>
+				<SwipeableDrawer
+					open={drawer}
+					onOpen={() => () => setDrawer(true)}
+					onClose={() => setDrawer(false)}>
+					<Grid
+						container
+						direction="row"
+						alignItems="center"
+						justify="space-between">
+						<Typography style={{ marginLeft: "1em" }}>Menu</Typography>
+						<IconButton
+							onClick={() => setDrawer(false)}
+							style={{ alignSelf: "end" }}>
+							<ChevronLeft />
+						</IconButton>
+					</Grid>
+					<Divider />
+					<List>
+						{Routes.map((prop, key) => {
+							return (
+								<NavLink
+									key={key}
+									to={prop.path}
+									style={{ textDecoration: "none" }}
+									onClick={() => setTitle(prop.name)}>
+									<MenuItem>
+										{/* <MenuItem selected={activeRoute(prop.path)}> */}
+										<ListItemIcon>{prop.icon}</ListItemIcon>
+										<ListItemText primary={prop.name} />
+									</MenuItem>
+								</NavLink>
+							);
+						})}
+					</List>
+				</SwipeableDrawer>
+
+				{/*
 				<BottomNavigation
 					className={classes.navigation}
 					value={value}
@@ -95,7 +184,7 @@ function App() {
 						label="História"
 						icon={<History />}
 					/>
-				</BottomNavigation>
+				</BottomNavigation> */}
 
 				{/* <nav>
 				<Link to="/">Trening</Link> | <Link to="/edit">Edit</Link> |{" "}
