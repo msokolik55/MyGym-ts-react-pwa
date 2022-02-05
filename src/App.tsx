@@ -21,11 +21,13 @@ import {
 	IconButton,
 	Divider,
 	List,
-	ListItem,
 	ListItemIcon,
 	ListItemText,
 	SwipeableDrawer,
-	MenuItem
+	MenuItem,
+	InputLabel,
+	FormControl,
+	Select
 } from "@material-ui/core";
 import {
 	// FitnessCenter,
@@ -39,7 +41,7 @@ import { makeStyles } from "@material-ui/styles";
 
 // data
 import { exercisesDemo } from "./data/exercises";
-import { history } from "./data/interfaces";
+import { exercise, history } from "./data/interfaces";
 import { dbKeys } from "./data/database";
 import { pagesRoutes, Routes } from "./data/pagesRoutes";
 
@@ -48,6 +50,7 @@ import MainPage from "./pages";
 import EditPage from "./pages/edit";
 import ExportPage from "./pages/export";
 import HistoryPage from "./pages/history";
+import ResetPage from "./pages/reset";
 
 const useStyles = makeStyles({
 	navigation: {
@@ -64,14 +67,14 @@ const useStyles = makeStyles({
 });
 
 function App() {
-	const [allExer, setAllExer] = useState(exercisesDemo);
+	const [allExer, setAllExer] = useState<exercise[]>(exercisesDemo);
 	const [history, setHistory] = useState<history[]>([]);
 
 	const classes = useStyles();
-	const [value, setValue] = useState(0);
-	const handleChange = (newValue: number) => {
-		setValue(newValue);
-	};
+	// const [value, setValue] = useState(0);
+	// const handleChange = (newValue: number) => {
+	// 	setValue(newValue);
+	// };
 
 	useEffect(() => {
 		get(dbKeys.exercises).then((val) => {
@@ -93,8 +96,20 @@ function App() {
 		set(dbKeys.history, history);
 	}, [history]);
 
-	const [title, setTitle] = useState("Tréning");
-	const [drawer, setDrawer] = useState(false);
+	const [title, setTitle] = useState<string>("Tréning");
+	const [drawer, setDrawer] = useState<boolean>(false);
+
+	// TODO: refactor
+	interface iPlace {
+		id: number;
+		name: string;
+	}
+	const [places, setPlaces] = useState<iPlace[]>([
+		{ id: 0, name: "default 1" },
+		{ id: 1, name: "default 2" }
+	]);
+	const [actualPlace, setActualPlace] = useState<number>(0);
+	// ENDTODO
 
 	return (
 		<Grid>
@@ -124,34 +139,61 @@ function App() {
 					onClose={() => setDrawer(false)}>
 					<Grid
 						container
-						direction="row"
-						alignItems="center"
-						justify="space-between">
-						<Typography style={{ marginLeft: "1em" }}>Menu</Typography>
-						<IconButton
-							onClick={() => setDrawer(false)}
-							style={{ alignSelf: "end" }}>
-							<ChevronLeft />
-						</IconButton>
-					</Grid>
-					<Divider />
-					<List>
-						{Routes.map((prop, key) => {
-							return (
-								<NavLink
-									key={key}
-									to={prop.path}
-									style={{ textDecoration: "none" }}
-									onClick={() => setTitle(prop.name)}>
-									<MenuItem>
-										{/* <MenuItem selected={activeRoute(prop.path)}> */}
-										<ListItemIcon>{prop.icon}</ListItemIcon>
-										<ListItemText primary={prop.name} />
+						direction="column"
+						justify="space-between"
+						style={{ flex: 1 }}>
+						<Grid>
+							<Grid
+								container
+								direction="row"
+								alignItems="center"
+								justify="space-between">
+								<Typography style={{ marginLeft: "1em" }}>
+									Menu
+								</Typography>
+								<IconButton
+									onClick={() => setDrawer(false)}
+									style={{ alignSelf: "end" }}>
+									<ChevronLeft />
+								</IconButton>
+							</Grid>
+							<Divider />
+							<List>
+								{Routes.map((prop, key) => {
+									return (
+										<NavLink
+											key={key}
+											to={prop.path}
+											style={{ textDecoration: "none" }}
+											onClick={() => setTitle(prop.name)}>
+											<MenuItem>
+												{/* <MenuItem selected={activeRoute(prop.path)}> */}
+												<ListItemIcon>{prop.icon}</ListItemIcon>
+												<ListItemText primary={prop.name} />
+											</MenuItem>
+										</NavLink>
+									);
+								})}
+							</List>
+						</Grid>
+						<FormControl>
+							<Divider />
+							<InputLabel>Miesto</InputLabel>
+							<Select
+								value={actualPlace}
+								onChange={(event) =>
+									setActualPlace(event.target.value as number)
+								}>
+								{places.map((place) => (
+									<MenuItem
+										key={"place" + place.id.toString()}
+										value={place.id}>
+										{place.name}
 									</MenuItem>
-								</NavLink>
-							);
-						})}
-					</List>
+								))}
+							</Select>
+						</FormControl>
+					</Grid>
 				</SwipeableDrawer>
 
 				{/*
@@ -221,6 +263,11 @@ function App() {
 							component={() => (
 								<HistoryPage data={history} setData={setHistory} />
 							)}
+						/>
+						<Route
+							exact
+							path={pagesRoutes.reset}
+							component={() => <ResetPage />}
 						/>
 						<Redirect to={pagesRoutes.home} />
 					</Switch>
