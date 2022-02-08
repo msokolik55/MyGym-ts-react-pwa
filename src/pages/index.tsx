@@ -46,10 +46,14 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 
 				{exer.fullProgram === undefined && exer.weights !== undefined && (
 					<p>
+						{console.log(exer)}
 						Vahy:{" "}
-						{exer.weights
-							.filter((weig) => weig.place === actualPlace)[0]
-							.values.join(" - ")}
+						{exer.weights.filter((weig) => weig.place === actualPlace)
+							.length === 0
+							? [0, 0, 0, 0].join(" - ")
+							: exer.weights
+									.filter((weig) => weig.place === actualPlace)[0]
+									.values.join(" - ")}
 					</p>
 				)}
 
