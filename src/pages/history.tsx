@@ -2,7 +2,7 @@ import React from "react";
 import { history } from "../data/interfaces";
 import { categories } from "../data/bodyParts";
 
-import { IconButton } from "@material-ui/core";
+import { Card, IconButton } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 
@@ -19,7 +19,8 @@ const useStyles = makeStyles({
 	},
 	flexColumn: {
 		display: "flex",
-		flexDirection: "column"
+		flexDirection: "column",
+		margin: "1em 2em 0 2em"
 	},
 	flexReverse: {
 		display: "flex",
@@ -33,8 +34,8 @@ const HistoryPage = ({ data, setData }: props) => {
 	return (
 		<div className={classes.flexReverse}>
 			{data !== undefined &&
-				data.map((item, id) => (
-					<div className={classes.flexColumn}>
+				data.map((item) => (
+					<Card className={classes.flexColumn}>
 						<div className={classes.flexRow}>
 							<IconButton
 								onClick={() => setData(data.filter((it) => it !== item))}>
@@ -72,7 +73,7 @@ const HistoryPage = ({ data, setData }: props) => {
 								))}
 							</ul>
 						)}
-					</div>
+					</Card>
 				))}
 		</div>
 	);
