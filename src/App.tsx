@@ -243,6 +243,7 @@ function App() {
 									exercises={allExer}
 									history={history}
 									setHistory={setHistory}
+									actualPlace={actualPlace}
 								/>
 							)}
 						/>

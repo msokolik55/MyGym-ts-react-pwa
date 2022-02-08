@@ -13,9 +13,10 @@ type props = {
 	exercises: exercise[];
 	history: history[];
 	setHistory: React.Dispatch<React.SetStateAction<history[]>>;
+	actualPlace: number;
 };
 
-const MainPage = ({ exercises, history, setHistory }: props) => {
+const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 	const randNumber = (arr: any[]) => {
 		return Math.floor(Math.random() * arr.length);
 	};
@@ -44,7 +45,12 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 				{exer.notes !== undefined && <p>{exer.notes}</p>}
 
 				{exer.fullProgram === undefined && exer.weights !== undefined && (
-					<p>Vahy: {exer.weights.join(" - ")}</p>
+					<p>
+						Vahy:{" "}
+						{exer.weights
+							.filter((weig) => weig.place === actualPlace)[0]
+							.values.join(" - ")}
+					</p>
 				)}
 
 				{exer.fullProgram === undefined && exer.equipments !== undefined && (
