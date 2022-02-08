@@ -8,7 +8,8 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	Snackbar
+	Snackbar,
+	SnackbarOrigin
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
@@ -16,6 +17,11 @@ const ResetPage = () => {
 	const [openSnackbarSuccess, setOpenSnackbarSuccess] = useState<boolean>(false);
 	const [openSnackbarFail, setOpenSnackbarFail] = useState<boolean>(false);
 	const [openDialog, setOpenDialog] = useState<boolean>(false);
+
+	const snackbarPosition: SnackbarOrigin = {
+		horizontal: "center",
+		vertical: "bottom"
+	};
 
 	return (
 		<>
@@ -55,10 +61,7 @@ const ResetPage = () => {
 			<Snackbar
 				open={openSnackbarSuccess}
 				autoHideDuration={2000}
-				anchorOrigin={{
-					horizontal: "center",
-					vertical: "bottom"
-				}}
+				anchorOrigin={snackbarPosition}
 				onClose={() => setOpenSnackbarSuccess(false)}>
 				<Alert severity="success">Mazanie uspesne</Alert>
 			</Snackbar>
@@ -66,10 +69,7 @@ const ResetPage = () => {
 			<Snackbar
 				open={openSnackbarFail}
 				autoHideDuration={2000}
-				anchorOrigin={{
-					horizontal: "center",
-					vertical: "bottom"
-				}}
+				anchorOrigin={snackbarPosition}
 				onClose={() => setOpenSnackbarFail(false)}>
 				<Alert severity="info">Mazanie zrusene</Alert>
 			</Snackbar>
