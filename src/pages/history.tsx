@@ -57,9 +57,17 @@ const HistoryPage = ({ data, setData }: props) => {
 									<li>
 										{drill.name}
 										<br />
-										{drill.weights !== undefined && (
-											<>({drill.weights.join(" - ")})</>
-										)}
+										{drill.weights !== undefined &&
+											drill.place !== undefined && (
+												<>
+													{drill.weights
+														.filter(
+															(weig) =>
+																weig.place === drill.place
+														)[0]
+														.values.join(" - ")}
+												</>
+											)}
 									</li>
 								))}
 							</ul>

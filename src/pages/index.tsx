@@ -46,7 +46,6 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 
 				{exer.fullProgram === undefined && exer.weights !== undefined && (
 					<p>
-						{console.log(exer)}
 						Vahy:{" "}
 						{exer.weights.filter((weig) => weig.place === actualPlace)
 							.length === 0
@@ -189,7 +188,7 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 												date: formatDate(),
 												category: category.key,
 												exercises: training.map((exerID) => {
-													let ex = JSON.parse(
+													let ex: exercise = JSON.parse(
 														JSON.stringify(
 															exercises.filter(
 																(exer) =>
@@ -197,6 +196,7 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 															)[0]
 														)
 													);
+													ex.place = actualPlace;
 
 													if (ex.fullProgram !== undefined) {
 														ex.fullProgram.series = series;

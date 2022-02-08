@@ -12,6 +12,7 @@ interface fullProgramItem {
 
 export interface exercise {
 	id: number;
+	place?: number;
 	enabled: boolean;
 	name: string;
 	bodyPart: bodyParts;
