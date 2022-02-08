@@ -41,7 +41,8 @@ import { makeStyles } from "@material-ui/styles";
 
 // data
 import { exercisesDemo } from "./data/exercises";
-import { exercise, history } from "./data/interfaces";
+import { history } from "./data/interfaces";
+import { exercise } from "./data/exercises";
 import { dbKeys } from "./data/database";
 import { pagesRoutes, Routes } from "./data/pagesRoutes";
 
@@ -249,7 +250,11 @@ function App() {
 							exact
 							path={pagesRoutes.edit}
 							component={() => (
-								<EditPage exercises={allExer} setExercises={setAllExer} />
+								<EditPage
+									exercises={allExer}
+									setExercises={setAllExer}
+									actualPlace={actualPlace}
+								/>
 							)}
 						/>
 						<Route

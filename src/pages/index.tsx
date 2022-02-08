@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { get, set } from "idb-keyval";
 import { dbKeys } from "../data/database";
 
-import { bodyPart, exercise, history } from "../data/interfaces";
+import { bodyPart, history } from "../data/interfaces";
+import { exercise } from "../data/exercises";
 import { equipmentss, categories } from "../data/bodyParts";
 
 import { Button, Snackbar } from "@material-ui/core";
