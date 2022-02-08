@@ -1,5 +1,5 @@
 import React, { useState, useRef, RefObject } from "react";
-import { exercise } from "../data/interfaces";
+import { exercise, defaultWeight } from "../data/exercises";
 import { categories } from "../data/bodyParts";
 
 import {
@@ -17,6 +17,7 @@ import { ArrowUpward, Link, Edit, Save, Menu } from "@material-ui/icons";
 type props = {
 	exercises: exercise[];
 	setExercises: React.Dispatch<React.SetStateAction<exercise[]>>;
+	actualPlace: number;
 };
 
 //#endregion
@@ -44,7 +45,8 @@ const InputWeight = (
 const EditValues = (
 	exer: exercise,
 	allExercises: exercise[],
-	setAllExercises: React.Dispatch<React.SetStateAction<exercise[]>>
+	setAllExercises: React.Dispatch<React.SetStateAction<exercise[]>>,
+	actualPlace: number
 ) => {
 	const [currExercise, setCurrExercise] = useState(exer);
 
@@ -82,7 +84,13 @@ const EditValues = (
 			if (inp1 !== null)
 				setCurrExercise({
 					...currExercise,
-					weights: [val1, val2, val3, val4]
+					// TODO
+					weights: currExercise.weights.map((weig) => {
+						if (weig.place === actualPlace)
+							return { ...weig, values: [val1, val2, val3, val4] };
+						return weig;
+					})
+					// weights: [...currExercise.weights]
 				});
 	};
 
@@ -152,13 +160,21 @@ const EditValues = (
 						<Grid>
 							Vahy:{" "}
 							{inputs.map((inp, idx) => {
-								if (currExercise.weights !== undefined)
-									return InputWeight(
-										currExercise.weights[idx],
-										inp,
-										() => changeWeights()
-									);
-								return undefined;
+								if (currExercise.weights === undefined) return undefined;
+
+								let weights = currExercise.weights.filter(
+									(weig) => weig.place === actualPlace
+								);
+								if (weights.length === 0)
+									currExercise.weights.push(defaultWeight(actualPlace));
+
+								return InputWeight(
+									currExercise.weights.filter(
+										(weig) => weig.place === actualPlace
+									)[0].values[idx],
+									inp,
+									() => changeWeights()
+								);
 							})}
 						</Grid>
 					)}
@@ -174,7 +190,7 @@ function ListItemLink(props: ListItemProps<"a", { button?: true }>) {
 
 //#endregion
 
-const EditPage = ({ exercises, setExercises }: props) => {
+const EditPage = ({ exercises, setExercises, actualPlace }: props) => {
 	// const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 	const [drawer, setDrawer] = useState(false);
 
@@ -219,7 +235,9 @@ const EditPage = ({ exercises, setExercises }: props) => {
 						</h3>
 						{exercises
 							.filter((exer) => exer.bodyPart === cat.key)
-							.map((exer) => EditValues(exer, exercises, setExercises))}
+							.map((exer) =>
+								EditValues(exer, exercises, setExercises, actualPlace)
+							)}
 					</>
 				))}
 			</div>

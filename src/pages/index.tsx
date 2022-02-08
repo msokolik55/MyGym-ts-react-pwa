@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { get, set } from "idb-keyval";
 import { dbKeys } from "../data/database";
 
-import { bodyPart, exercise, history } from "../data/interfaces";
+import { bodyPart, history } from "../data/interfaces";
+import { exercise } from "../data/exercises";
 import { equipmentss, categories } from "../data/bodyParts";
 
 import { Button, Snackbar } from "@material-ui/core";
@@ -12,9 +13,10 @@ type props = {
 	exercises: exercise[];
 	history: history[];
 	setHistory: React.Dispatch<React.SetStateAction<history[]>>;
+	actualPlace: number;
 };
 
-const MainPage = ({ exercises, history, setHistory }: props) => {
+const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 	const randNumber = (arr: any[]) => {
 		return Math.floor(Math.random() * arr.length);
 	};
@@ -43,7 +45,15 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 				{exer.notes !== undefined && <p>{exer.notes}</p>}
 
 				{exer.fullProgram === undefined && exer.weights !== undefined && (
-					<p>Vahy: {exer.weights.join(" - ")}</p>
+					<p>
+						Vahy:{" "}
+						{exer.weights.filter((weig) => weig.place === actualPlace)
+							.length === 0
+							? [0, 0, 0, 0].join(" - ")
+							: exer.weights
+									.filter((weig) => weig.place === actualPlace)[0]
+									.values.join(" - ")}
+					</p>
 				)}
 
 				{exer.fullProgram === undefined && exer.equipments !== undefined && (
@@ -178,7 +188,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 												date: formatDate(),
 												category: category.key,
 												exercises: training.map((exerID) => {
-													let ex = JSON.parse(
+													let ex: exercise = JSON.parse(
 														JSON.stringify(
 															exercises.filter(
 																(exer) =>
@@ -186,6 +196,7 @@ const MainPage = ({ exercises, history, setHistory }: props) => {
 															)[0]
 														)
 													);
+													ex.place = actualPlace;
 
 													if (ex.fullProgram !== undefined) {
 														ex.fullProgram.series = series;

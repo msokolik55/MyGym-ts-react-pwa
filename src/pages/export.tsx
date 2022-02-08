@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { exercise } from "../data/interfaces";
+import { exercise } from "../data/exercises";
 
 import { Button, Snackbar } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
