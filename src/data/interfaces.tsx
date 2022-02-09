@@ -13,8 +13,8 @@ export interface bodyPart {
 }
 
 export interface history {
-	// date: Date;
-	date: string;
+	date: number;
+	// date: string;
 	category: bodyParts;
 	exercises: exercise[];
 }

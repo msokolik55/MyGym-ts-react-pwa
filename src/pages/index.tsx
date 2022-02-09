@@ -133,26 +133,6 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 		set(dbKeys.actualCategory, category);
 	}, [category]);
 
-	const formatTwoDigits = (num: number) => {
-		const str = num.toString();
-		return str.length === 1 ? "0" + str : str;
-	};
-
-	const formatDate = () => {
-		const date = new Date();
-		let result =
-			formatTwoDigits(date.getDate()) +
-			"." +
-			formatTwoDigits(date.getMonth() + 1) +
-			"." +
-			date.getFullYear().toString() +
-			" " +
-			formatTwoDigits(date.getHours()) +
-			":" +
-			formatTwoDigits(date.getMinutes());
-		return result;
-	};
-
 	const [open, setOpen] = useState(false);
 
 	const inpSeries = useRef<HTMLInputElement>(null);
@@ -184,8 +164,8 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 										setHistory([
 											...history,
 											{
-												// date: new Date(),
-												date: formatDate(),
+												date: new Date().getTime(),
+												// date: formatDate(),
 												category: category.key,
 												exercises: training.map((exerID) => {
 													let ex: exercise = JSON.parse(
