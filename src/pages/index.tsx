@@ -150,8 +150,19 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			<div className="App">
+				{categories.map((cat) => (
+					<Button
+						variant="outlined"
+						onClick={() => {
+							setCategory(cat);
+							generateExercises(cat, setTraining);
+						}}>
+						{cat.name}
+					</Button>
+				))}
+				<br />
 				<Button variant="outlined" onClick={() => generateCategory(setTraining)}>
-					Vygeneruj
+					Nahodne
 				</Button>
 				{category !== undefined && (
 					<>
