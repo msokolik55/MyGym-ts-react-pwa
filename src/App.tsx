@@ -105,10 +105,14 @@ function App() {
 		id: number;
 		name: string;
 	}
-	const [places, setPlaces] = useState<iPlace[]>([
-		{ id: 0, name: "default 1" },
-		{ id: 1, name: "default 2" }
-	]);
+	// const [places, setPlaces] = useState<iPlace[]>([
+	// 	{ id: 0, name: "default 1" },
+	// 	{ id: 1, name: "default 2" }
+	// ]);
+	const places: iPlace[] = [
+		{ id: 0, name: "Doma" },
+		{ id: 1, name: "Intrak" }
+	];
 	const [actualPlace, setActualPlace] = useState<number>(0);
 	// ENDTODO
 

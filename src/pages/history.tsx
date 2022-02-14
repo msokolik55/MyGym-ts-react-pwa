@@ -18,7 +18,7 @@ import {
 import { Delete } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/styles";
 import { DatePicker } from "@mui/lab";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
 import skLocale from "date-fns/locale/sk";
 
 type props = {
