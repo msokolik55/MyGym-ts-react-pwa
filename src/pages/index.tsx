@@ -6,8 +6,20 @@ import { bodyPart, history } from "../data/interfaces";
 import { exercise } from "../data/exercises";
 import { equipmentss, categories } from "../data/bodyParts";
 
-import { Button, Snackbar } from "@material-ui/core";
+import {
+	Button,
+	Checkbox,
+	Divider,
+	FormControl,
+	Grid,
+	InputLabel,
+	ListItemText,
+	MenuItem,
+	OutlinedInput,
+	Snackbar
+} from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 type props = {
 	exercises: exercise[];
@@ -98,7 +110,11 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 		let used: number[] = [];
 		let training: number[] = [];
 		let choice = exercises.filter(
-			(exer) => exer.bodyPart === category.key && exer.enabled
+			(exer) =>
+				exer.bodyPart === category.key &&
+				exer.enabled &&
+				(exer.equipments === undefined ||
+					selectedEquipmentsIDs.includes(exer.equipments))
 		);
 
 		while (count < category.count && count < choice.length) {
@@ -147,77 +163,142 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 		setSeries(val);
 	};
 
+	const selectEquipmentsByIDs = (ids: number[]) => {
+		return ids.map((id) => equipmentss.filter((equip) => equip.key === id)[0]);
+	};
+	const [selectedEquipmentsIDs, setSelectedEquipmentsIDs] = React.useState<number[]>(
+		Array.from(Array(equipmentss.length).keys())
+	);
+	const handleChange = (event: SelectChangeEvent<typeof selectedEquipmentsIDs>) => {
+		let {
+			target: { value }
+		} = event;
+		setSelectedEquipmentsIDs(value as number[]);
+	};
+
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			<div className="App">
-				<Button variant="outlined" onClick={() => generateCategory(setTraining)}>
-					Vygeneruj
-				</Button>
-				{category !== undefined && (
-					<>
-						{training.length > 0 && (
-							<>
-								<Button
-									variant="outlined"
-									onClick={() => {
-										setOpen(true);
-										setHistory([
-											...history,
-											{
-												date: new Date().getTime(),
-												// date: formatDate(),
-												category: category.key,
-												exercises: training.map((exerID) => {
-													let ex: exercise = JSON.parse(
-														JSON.stringify(
-															exercises.filter(
-																(exer) =>
-																	exer.id === exerID
-															)[0]
-														)
-													);
-													ex.place = actualPlace;
-
-													if (ex.fullProgram !== undefined) {
-														ex.fullProgram.series = series;
-													}
-
-													return ex;
-												})
+				{categories.map((cat) => (
+					<Button
+						variant="outlined"
+						onClick={() => {
+							setCategory(cat);
+							generateExercises(cat, setTraining);
+						}}>
+						{cat.name}
+					</Button>
+				))}
+				<Divider />
+				<Grid container direction="row">
+					<div>
+						<FormControl style={{ maxWidth: "10em", minWidth: "6.5em" }}>
+							<InputLabel>Pomocky</InputLabel>
+							<Select
+								multiple
+								value={selectedEquipmentsIDs}
+								onChange={handleChange}
+								input={<OutlinedInput label="Pomocky" />}
+								renderValue={(selected) =>
+									selectEquipmentsByIDs(selected)
+										.map((equip) => equip.name)
+										.join(", ")
+								}>
+								{equipmentss.map((equip) => (
+									<MenuItem key={equip.key} value={equip.key}>
+										<Checkbox
+											checked={
+												selectedEquipmentsIDs.indexOf(equip.key) >
+												-1
 											}
-										]);
-									}}>
-									Odtrenovane
-								</Button>
-								<Snackbar
-									open={open}
-									autoHideDuration={2000}
-									anchorOrigin={{
-										horizontal: "center",
-										vertical: "bottom"
-									}}
-									onClose={() => setOpen(false)}>
-									<Alert severity="success">Pridane do historie</Alert>
-								</Snackbar>
+										/>
+										<ListItemText primary={equip.name} />
+									</MenuItem>
+								))}
+							</Select>
+						</FormControl>
+					</div>
+					<div style={{ flex: 1 }}>
+						<Button
+							variant="outlined"
+							onClick={() => generateCategory(setTraining)}>
+							Nahodne
+						</Button>
+						{category !== undefined && (
+							<>
+								{training.length > 0 && (
+									<>
+										<Button
+											variant="outlined"
+											onClick={() => {
+												setOpen(true);
+												setHistory([
+													...history,
+													{
+														date: new Date().getTime(),
+														category: category.key,
+														exercises: training.map(
+															(exerID) => {
+																let ex: exercise =
+																	JSON.parse(
+																		JSON.stringify(
+																			exercises.filter(
+																				(exer) =>
+																					exer.id ===
+																					exerID
+																			)[0]
+																		)
+																	);
+																ex.place = actualPlace;
+
+																if (
+																	ex.fullProgram !==
+																	undefined
+																) {
+																	ex.fullProgram.series =
+																		series;
+																}
+
+																return ex;
+															}
+														)
+													}
+												]);
+											}}>
+											Odtrenovane
+										</Button>
+									</>
+								)}
+								<h2>{category.name}</h2>
 							</>
 						)}
-						<h2>{category.name}</h2>
-					</>
-				)}
-				{training.length === 1 && (
-					<input
-						style={{ width: "3em" }}
-						type="number"
-						value={series}
-						min="0"
-						ref={inpSeries}
-						onChange={() => handleInputSeries()}
-					/>
-				)}
-				{training.map((exerID, id) => (
-					<div key={id}>{renderExercise(exerID)}</div>
-				))}
+						{training.length === 1 && (
+							<input
+								style={{ width: "3em" }}
+								type="number"
+								value={series}
+								min="0"
+								ref={inpSeries}
+								onChange={() => handleInputSeries()}
+							/>
+						)}
+						{training.map((exerID, id) => (
+							<div key={id}>{renderExercise(exerID)}</div>
+						))}
+					</div>
+				</Grid>
 			</div>
+
+			<Snackbar
+				open={open}
+				autoHideDuration={2000}
+				anchorOrigin={{
+					horizontal: "center",
+					vertical: "bottom"
+				}}
+				onClose={() => setOpen(false)}>
+				<Alert severity="success">Pridane do historie</Alert>
+			</Snackbar>
 		</div>
 	);
 };
