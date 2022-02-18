@@ -9,17 +9,18 @@ import { equipmentss, categories } from "../data/bodyParts";
 import {
 	Button,
 	Checkbox,
-	Divider,
 	FormControl,
 	Grid,
 	InputLabel,
 	ListItemText,
 	MenuItem,
 	OutlinedInput,
-	Snackbar
+	Snackbar,
+	Select as SelectCore
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { bodyParts } from "../data/enums";
 
 type props = {
 	exercises: exercise[];
@@ -96,8 +97,11 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 		);
 	}
 
-	const generateCategory = (setter: React.Dispatch<React.SetStateAction<number[]>>) => {
-		const randCateg = randNumber(categories);
+	const generateCategory = (
+		setter: React.Dispatch<React.SetStateAction<number[]>>,
+		cat: bodyParts | undefined
+	) => {
+		const randCateg = cat === undefined ? randNumber(categories) : cat;
 		setCategory(categories[randCateg]);
 		generateExercises(categories[randCateg], setter);
 	};
@@ -179,126 +183,124 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 		setSelectedEquipmentsIDs(value as number[]);
 	};
 
+	const [selectedPart, setSelectedPart] = useState<number | undefined>(undefined);
+
 	return (
-		<div style={{ display: "flex", justifyContent: "space-around" }}>
-			<div className="App">
-				{categories.map((cat) => (
+		<div
+			style={{
+				display: "flex",
+				justifyContent: "space-around",
+				textAlign: "center"
+			}}>
+			<Grid container direction="row">
+				<Grid container direction="column" style={{ flex: 1 }}>
+					<FormControl>
+						<InputLabel>Pomocky</InputLabel>
+						<Select
+							multiple
+							value={selectedEquipmentsIDs}
+							onChange={handleChange}
+							input={<OutlinedInput label="Pomocky" />}
+							renderValue={(selected) =>
+								selectEquipmentsByIDs(selected)
+									.map((equip) => equip.name)
+									.join(", ")
+							}>
+							{equipmentss.map((equip) => (
+								<MenuItem value={equip.key}>
+									<Checkbox
+										checked={
+											selectedEquipmentsIDs.indexOf(equip.key) > -1
+										}
+									/>
+									<ListItemText primary={equip.name} />
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+
+					<FormControl>
+						<InputLabel>Oblast</InputLabel>
+						<SelectCore
+							variant="outlined"
+							value={selectedPart}
+							onChange={(event) => {
+								setSelectedPart(event.target.value as number);
+							}}>
+							<MenuItem key="all" value={undefined}>
+								<em>Nahodne</em>
+							</MenuItem>
+							{categories.map((cat) => (
+								<MenuItem value={cat.key}>{cat.name}</MenuItem>
+							))}
+						</SelectCore>
+					</FormControl>
 					<Button
 						variant="outlined"
-						onClick={() => {
-							setCategory(cat);
-							generateExercises(cat, setTraining);
-						}}>
-						{cat.name}
+						onClick={() => generateCategory(setTraining, selectedPart)}>
+						Generovat
 					</Button>
-				))}
-				<Divider />
-				<Grid container direction="row">
-					<div>
-						<FormControl style={{ maxWidth: "10em", minWidth: "6.5em" }}>
-							<InputLabel>Pomocky</InputLabel>
-							<Select
-								multiple
-								value={selectedEquipmentsIDs}
-								onChange={handleChange}
-								input={<OutlinedInput label="Pomocky" />}
-								renderValue={(selected) =>
-									selectEquipmentsByIDs(selected)
-										.map((equip) => equip.name)
-										.join(", ")
-								}>
-								{equipmentss.map((equip) => (
-									<MenuItem key={equip.key} value={equip.key}>
-										<Checkbox
-											checked={
-												selectedEquipmentsIDs.indexOf(equip.key) >
-												-1
-											}
-										/>
-										<ListItemText primary={equip.name} />
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-					</div>
-					<div style={{ flex: 1 }}>
+
+					{category !== undefined && training.length > 0 && (
 						<Button
 							variant="outlined"
-							onClick={() => generateCategory(setTraining)}>
-							Nahodne
+							onClick={() => {
+								setOpen(true);
+								setHistory([
+									...history,
+									{
+										date: new Date().getTime(),
+										category: category.key,
+										exercises: training.map((exerID) => {
+											let ex: exercise = JSON.parse(
+												JSON.stringify(
+													exercises.filter(
+														(exer) => exer.id === exerID
+													)[0]
+												)
+											);
+											ex.place = actualPlace;
+
+											if (ex.fullProgram !== undefined) {
+												ex.fullProgram.series = series;
+											}
+
+											return ex;
+										})
+									}
+								]);
+							}}>
+							Odtrenovane
 						</Button>
-						{category !== undefined && (
-							<>
-								{training.length > 0 && (
-									<>
-										<Button
-											variant="outlined"
-											onClick={() => {
-												setOpen(true);
-												setHistory([
-													...history,
-													{
-														date: new Date().getTime(),
-														category: category.key,
-														exercises: training.map(
-															(exerID) => {
-																let ex: exercise =
-																	JSON.parse(
-																		JSON.stringify(
-																			exercises.filter(
-																				(exer) =>
-																					exer.id ===
-																					exerID
-																			)[0]
-																		)
-																	);
-																ex.place = actualPlace;
-
-																if (
-																	ex.fullProgram !==
-																	undefined
-																) {
-																	ex.fullProgram.series =
-																		series;
-																}
-
-																return ex;
-															}
-														)
-													}
-												]);
-											}}>
-											Odtrenovane
-										</Button>
-									</>
-								)}
-								<h2>{category.name}</h2>
-							</>
-						)}
-						{training.length === 1 && (
-							<>
-								<Button onClick={() => handleInputSeries((x) => x - 1)}>
-									-
-								</Button>
-								<input
-									style={{ width: "3em" }}
-									type="number"
-									value={series}
-									min="0"
-									ref={inpSeries}
-									onChange={() => handleInputSeries((x) => x)}
-								/>
-								<Button onClick={() => handleInputSeries((x) => x + 1)}>
-									+
-								</Button>
-							</>
-						)}
-						{training.map((exerID, id) => (
-							<div key={id}>{renderExercise(exerID)}</div>
-						))}
-					</div>
+					)}
 				</Grid>
-			</div>
+				<div style={{ flex: 5 }}>
+					{category !== undefined && training.length > 0 && (
+						<h2>{category.name}</h2>
+					)}
+					{training.length === 1 && (
+						<>
+							<Button onClick={() => handleInputSeries((x) => x - 1)}>
+								-
+							</Button>
+							<input
+								style={{ width: "3em" }}
+								type="number"
+								value={series}
+								min="0"
+								ref={inpSeries}
+								onChange={() => handleInputSeries((x) => x)}
+							/>
+							<Button onClick={() => handleInputSeries((x) => x + 1)}>
+								+
+							</Button>
+						</>
+					)}
+					{training.map((exerID, id) => (
+						<div key={id}>{renderExercise(exerID)}</div>
+					))}
+				</div>
+			</Grid>
 
 			<Snackbar
 				open={open}
