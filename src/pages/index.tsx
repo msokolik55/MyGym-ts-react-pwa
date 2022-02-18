@@ -158,8 +158,11 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 		return inp.current !== null ? Number(inp.current.value) : Number(0);
 	};
 
-	const handleInputSeries = () => {
+	type plusMinus = (x: number) => number;
+	const handleInputSeries = (fn: plusMinus) => {
 		let val = getValueFromInput(inpSeries);
+		val = fn(val);
+		val = val < 0 ? 0 : val;
 		setSeries(val);
 	};
 
@@ -273,14 +276,22 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 							</>
 						)}
 						{training.length === 1 && (
-							<input
-								style={{ width: "3em" }}
-								type="number"
-								value={series}
-								min="0"
-								ref={inpSeries}
-								onChange={() => handleInputSeries()}
-							/>
+							<>
+								<Button onClick={() => handleInputSeries((x) => x - 1)}>
+									-
+								</Button>
+								<input
+									style={{ width: "3em" }}
+									type="number"
+									value={series}
+									min="0"
+									ref={inpSeries}
+									onChange={() => handleInputSeries((x) => x)}
+								/>
+								<Button onClick={() => handleInputSeries((x) => x + 1)}>
+									+
+								</Button>
+							</>
 						)}
 						{training.map((exerID, id) => (
 							<div key={id}>{renderExercise(exerID)}</div>
