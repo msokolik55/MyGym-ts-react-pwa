@@ -193,7 +193,7 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 				textAlign: "center"
 			}}>
 			<Grid container direction="row">
-				<Grid container direction="column" style={{ flex: 1 }}>
+				<Grid container direction="column">
 					<FormControl>
 						<InputLabel>Pomocky</InputLabel>
 						<Select
@@ -274,12 +274,13 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 						</Button>
 					)}
 				</Grid>
-				<div style={{ flex: 5 }}>
+
+				<Grid container direction="column">
 					{category !== undefined && training.length > 0 && (
 						<h2>{category.name}</h2>
 					)}
 					{training.length === 1 && (
-						<>
+						<Grid container direction="row" justify="center">
 							<Button onClick={() => handleInputSeries((x) => x - 1)}>
 								-
 							</Button>
@@ -294,12 +295,12 @@ const MainPage = ({ exercises, history, setHistory, actualPlace }: props) => {
 							<Button onClick={() => handleInputSeries((x) => x + 1)}>
 								+
 							</Button>
-						</>
+						</Grid>
 					)}
 					{training.map((exerID, id) => (
 						<div key={id}>{renderExercise(exerID)}</div>
 					))}
-				</div>
+				</Grid>
 			</Grid>
 
 			<Snackbar
